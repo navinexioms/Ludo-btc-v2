@@ -142,6 +142,7 @@ namespace Photon.Pun.UtilityScripts
 
 		void InitializeDice()
 		{
+			print ("InitializeDice()");
 			//		print ("Dice interactable becomes true");
 //			print ("Dice interactable becomes true");
 			DiceRollButton.interactable = true;
@@ -216,9 +217,15 @@ namespace Photon.Pun.UtilityScripts
 							} else if (i == 2) {
 								GreenPlayerIII_Script.GreenPlayerIII_ColName = "none";	
 							} else if (i == 3) {
-								GreenPlayerIV_Script.GreenPlayerIV_ColName = "none";	
+								GreenPlayerIV_Script.GreenPlayerIV_ColName = "none";
 							}
-							PlayerCanPlayAgain = true;
+							if (PhotonNetwork.IsMasterClient) {
+								
+							}
+							else 
+							{
+								PlayerCanPlayAgain = true;
+							}
 						}
 					}
 				}
@@ -245,6 +252,13 @@ namespace Photon.Pun.UtilityScripts
 							}
 							BluePlayer_Steps [i] = 0;
 							playerTurn = "GREEN";
+							if (PhotonNetwork.IsMasterClient) {
+								PlayerCanPlayAgain = true;
+							}
+							else 
+							{
+								
+							}
 						}
 					}
 				}
@@ -285,11 +299,250 @@ namespace Photon.Pun.UtilityScripts
 				selectDiceNumAnimation = Random.Range (0, 6);
 				selectDiceNumAnimation += 1;
 				print ("selectDiceNumAnimation:" + selectDiceNumAnimation);
-				rootNode.Add ("DiceNumber", selectDiceNumAnimation.ToString());
+				rootNode.Add ("DiceNumber", selectDiceNumAnimation.ToString(temp));
 				temp = rootNode.ToString ();
-				this.MakeTurn (temp);
+
+				StartCoroutine (PlayersNotInitializedForTimeDelay (temp));
+
+//				this.MakeTurn (temp);//This will not be called first
+
+
 			}
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		IEnumerator PlayersNotInitializedForTimeDelay(string temp)
+		{
+			yield return new WaitForSeconds (0);
+			switch (playerTurn) 
+			{
+			case "BLUE":
+				//=============condition for border glow=============
+
+				if ((blueMovemenBlock.Count - BluePlayer_Steps [0]) >= selectDiceNumAnimation && BluePlayer_Steps [0] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [0])) {
+					BluePlayerI_Border.SetActive (true);
+					BluePlayerI_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+				} else {
+					BluePlayerI_Border.SetActive (false);
+					BluePlayerI_Button.interactable = false;
+
+				}
+				if ((blueMovemenBlock.Count - BluePlayer_Steps [1]) >= selectDiceNumAnimation && BluePlayer_Steps [1] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [1])) {
+					BluePlayerII_Border.SetActive (true);
+					BluePlayerII_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+				} else {
+					BluePlayerII_Border.SetActive (false);
+					BluePlayerII_Button.interactable = false;
+
+
+				}
+				if ((blueMovemenBlock.Count - BluePlayer_Steps [2]) >= selectDiceNumAnimation && BluePlayer_Steps [2] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [2])) {
+					BluePlayerIII_Border.SetActive (true);
+					BluePlayerIII_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+				} else {
+					BluePlayerIII_Border.SetActive (false);
+					BluePlayerIII_Button.interactable = false;
+
+				}
+				if ((blueMovemenBlock.Count - BluePlayer_Steps [3]) >= selectDiceNumAnimation && BluePlayer_Steps [3] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [3])) {
+					BluePlayerIV_Border.SetActive (true);
+					BluePlayerIV_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+					print ("not Skipping");
+				} else {
+					BluePlayerIV_Border.SetActive (false);
+					BluePlayerIV_Button.interactable = false;
+
+				}
+				//===============Players border glow When Opening===============//
+				if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && (BluePlayer_Steps [0] == 0 || BluePlayer_Steps [1] == 0 || BluePlayer_Steps [2] == 0 || BluePlayer_Steps [3] == 0)) {
+					print ("Players border glow When Opening");
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && BluePlayer_Steps [0] == 0) {
+						BluePlayerI_Border.SetActive (true);
+						BluePlayerI_Button.interactable = true;
+					}
+
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && BluePlayer_Steps [1] == 0) {
+						BluePlayerII_Border.SetActive (true);
+						BluePlayerII_Button.interactable = true;
+					}
+
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && BluePlayer_Steps [2] == 0) {
+						BluePlayerIII_Border.SetActive (true);
+						BluePlayerIII_Button.interactable = true;
+					}
+
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && BluePlayer_Steps [3] == 0) {
+						BluePlayerIV_Border.SetActive (true);
+						BluePlayerIV_Button.interactable = true;
+					}
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Added:" + temp);
+				}	
+				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
+
+				if (!BluePlayerI_Border.activeInHierarchy && !BluePlayerII_Border.activeInHierarchy &&
+				    !BluePlayerIII_Border.activeInHierarchy && !BluePlayerIV_Border.activeInHierarchy) {
+					rootNode.Add ("WaitingTime", "DontSkip");
+					temp = rootNode.ToString ();
+					print ("not Skipping");
+				}
+
+				BluePlayerI_Border.SetActive (false);
+				BluePlayerI_Button.interactable = false;
+
+				BluePlayerII_Border.SetActive (false);
+				BluePlayerII_Button.interactable = false;
+
+				BluePlayerIII_Border.SetActive (false);
+				BluePlayerIII_Button.interactable = false;
+
+				BluePlayerIV_Border.SetActive (false);
+				BluePlayerIV_Button.interactable = false;
+			
+				break;
+			case "GREEN":
+				//=============condition for border glow=============
+
+				if ((greenMovementBlock.Count - GreenPlayer_Steps [0]) >= selectDiceNumAnimation && GreenPlayer_Steps [0] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [0])) {
+					GreenPlayerI_Border.SetActive (true);
+					GreenPlayerI_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+
+				} else {
+					GreenPlayerI_Border.SetActive (false);
+					GreenPlayerI_Button.interactable = false;
+					rootNode.Add ("WaitingTime", "DontSkip");
+					temp = rootNode.ToString ();
+					print ("not Skipping");
+				}
+				if ((greenMovementBlock.Count - GreenPlayer_Steps [1]) >= selectDiceNumAnimation && GreenPlayer_Steps [1] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [1])) {
+					GreenPlayerII_Border.SetActive (true);
+					GreenPlayerII_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+				} else {
+					GreenPlayerII_Border.SetActive (false);
+					GreenPlayerII_Button.interactable = false;
+					rootNode.Add ("WaitingTime", "DontSkip");
+					temp = rootNode.ToString ();
+					print ("not Skipping");
+				}
+				if ((greenMovementBlock.Count - GreenPlayer_Steps [2]) >= selectDiceNumAnimation && GreenPlayer_Steps [2] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [2])) {
+					GreenPlayerIII_Border.SetActive (true);
+					GreenPlayerIII_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+				} else {
+					GreenPlayerIII_Border.SetActive (false);
+					GreenPlayerIII_Button.interactable = false;
+					rootNode.Add ("WaitingTime", "DontSkip");
+					temp = rootNode.ToString ();
+					print ("not Skipping");
+				}
+				if ((greenMovementBlock.Count - GreenPlayer_Steps [3]) >= selectDiceNumAnimation && GreenPlayer_Steps [3] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [3])) {
+					GreenPlayerIV_Border.SetActive (true);
+					GreenPlayerIV_Button.interactable = true;
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+					print ("Border glowing");
+				} else {
+					GreenPlayerIV_Border.SetActive (false);
+					GreenPlayerIV_Button.interactable = false;
+					rootNode.Add ("WaitingTime", "DontSkip");
+					temp = rootNode.ToString ();
+					print ("not Skipping");
+				}
+
+				//===============Players border glow When Opening===============//
+
+				if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && (GreenPlayer_Steps [0] == 0 || GreenPlayer_Steps [1] == 0 || GreenPlayer_Steps [2] == 0 || GreenPlayer_Steps [3] == 0)) {
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && GreenPlayer_Steps [0] == 0) {
+						GreenPlayerI_Border.SetActive (true);
+						GreenPlayerI_Button.interactable = true;
+					}
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && GreenPlayer_Steps [1] == 0) {
+						GreenPlayerII_Border.SetActive (true);
+						GreenPlayerII_Button.interactable = true;
+					}
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && GreenPlayer_Steps [2] == 0) {
+						GreenPlayerIII_Border.SetActive (true);
+						GreenPlayerIII_Button.interactable = true;
+					}
+					if ((selectDiceNumAnimation == 6 || selectDiceNumAnimation == 1) && GreenPlayer_Steps [3] == 0) {
+						GreenPlayerIV_Border.SetActive (true);
+						GreenPlayerIV_Button.interactable = true;
+					}
+					rootNode.Add ("WaitingTime", "Skip");
+					temp = rootNode.ToString ();
+				}
+				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
+
+				if (!GreenPlayerI_Border.activeInHierarchy && !GreenPlayerII_Border.activeInHierarchy &&
+					!GreenPlayerIII_Border.activeInHierarchy && !GreenPlayerIV_Border.activeInHierarchy && selectDiceNumAnimation!=6) 
+				{
+					rootNode.Add ("WaitingTime", "DontSkip");
+					temp = rootNode.ToString ();
+					print ("not Skipping");
+				}
+
+				GreenPlayerI_Border.SetActive (false);
+				GreenPlayerI_Button.interactable = false;
+
+				GreenPlayerII_Border.SetActive (false);
+				GreenPlayerII_Button.interactable = false;
+
+				GreenPlayerIII_Border.SetActive (false);
+				GreenPlayerIII_Button.interactable = false;
+
+				GreenPlayerIV_Border.SetActive (false);
+				GreenPlayerIV_Button.interactable = false;
+
+				break;
+			}
+			this.MakeTurn (temp);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		IEnumerator DiceToss(int DiceNumber)
 		{
@@ -306,6 +559,9 @@ namespace Photon.Pun.UtilityScripts
 			StartCoroutine (PlayersNotInitialized ());
 		}
 
+
+
+
 		IEnumerator PlayersNotInitialized()
 		{
 //			print ("Executing PlayersNotInitialized()");
@@ -319,7 +575,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [0]) >= selectDiceNumAnimation && BluePlayer_Steps [0] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [0])) {
 					BluePlayerI_Border.SetActive (true);
 					BluePlayerI_Button.interactable = true;
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerI_Border.SetActive (false);
 					BluePlayerI_Button.interactable = false;
@@ -327,7 +583,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [1]) >= selectDiceNumAnimation && BluePlayer_Steps [1] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [1])) {
 					BluePlayerII_Border.SetActive (true);
 					BluePlayerII_Button.interactable = true;
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerII_Border.SetActive (false);
 					BluePlayerII_Button.interactable = false;
@@ -335,7 +591,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [2]) >= selectDiceNumAnimation && BluePlayer_Steps [2] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [2])) {
 					BluePlayerIII_Border.SetActive (true);
 					BluePlayerIII_Button.interactable = true;
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerIII_Border.SetActive (false);
 					BluePlayerIII_Button.interactable = false;
@@ -343,7 +599,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [3]) >= selectDiceNumAnimation && BluePlayer_Steps [3] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [3])) {
 					BluePlayerIV_Border.SetActive (true);
 					BluePlayerIV_Button.interactable = true;
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerIV_Border.SetActive (false);
 					BluePlayerIV_Button.interactable = false;
@@ -370,7 +626,7 @@ namespace Photon.Pun.UtilityScripts
 						BluePlayerIV_Border.SetActive (true);
 						BluePlayerIV_Button.interactable = true;
 					}
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 				}	
 				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
 
@@ -390,7 +646,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [0]) >= selectDiceNumAnimation && GreenPlayer_Steps [0] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [0])) {
 					GreenPlayerI_Border.SetActive (true);
 					GreenPlayerI_Button.interactable = true;
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 
 					print ("Glowing 1st green Player");
 				} else {
@@ -401,7 +657,7 @@ namespace Photon.Pun.UtilityScripts
 					GreenPlayerII_Border.SetActive (true);
 					GreenPlayerII_Button.interactable = true;
 					print ("Glowing 2nd green Player");
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 				} else {
 					GreenPlayerII_Border.SetActive (false);
 					GreenPlayerII_Button.interactable = false;
@@ -409,7 +665,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [2]) >= selectDiceNumAnimation && GreenPlayer_Steps [2] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [2])) {
 					GreenPlayerIII_Border.SetActive (true);
 					GreenPlayerIII_Button.interactable = true;
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 					print ("Glowing 3rd green Player");
 				} else {
 					GreenPlayerIII_Border.SetActive (false);
@@ -418,7 +674,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [3]) >= selectDiceNumAnimation && GreenPlayer_Steps [3] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [3])) {
 					GreenPlayerIV_Border.SetActive (true);
 					GreenPlayerIV_Button.interactable = true;
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 					print ("Glowing 4th green Player");
 				} else {
 					GreenPlayerIV_Border.SetActive (false);
@@ -448,7 +704,7 @@ namespace Photon.Pun.UtilityScripts
 						GreenPlayerIV_Border.SetActive (true);
 						GreenPlayerIV_Button.interactable = true;
 					}
-					PlayerCanPlayAgain = true;
+//					PlayerCanPlayAgain = true;
 				}
 				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
 
@@ -463,13 +719,11 @@ namespace Photon.Pun.UtilityScripts
 				break;
 			}
 		}
-
-
-
-
+			
 
 		public void BluePlayerI_UI()
 		{
+			print ("BluePlayerI_UI()");
 			//disabling BluePlayer border and Button script
 			if (playerTurn == "BLUE" && (blueMovemenBlock.Count - BluePlayer_Steps [0]) > selectDiceNumAnimation) 
 			{
@@ -549,6 +803,7 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public void BluePlayerII_UI()
 		{
+			print ("BluePlayerII_UI()");
 			if (playerTurn == "BLUE" && (blueMovemenBlock.Count - BluePlayer_Steps [1]) > selectDiceNumAnimation)
 			{
 				if (BluePlayer_Steps [1] > 0) 
@@ -627,6 +882,7 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public  void BluePlayerIII_UI()
 		{
+			print ("BluePlayerIII_UI()");
 			if (playerTurn == "BLUE" && (blueMovemenBlock.Count - BluePlayer_Steps [2]) > selectDiceNumAnimation) 
 			{
 				if (BluePlayer_Steps [2] > 0) 
@@ -704,6 +960,7 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public void BluePlayerIV_UI()
 		{
+			print ("BluePlayerIV_UI()");
 			if (playerTurn == "BLUE" && (blueMovemenBlock.Count - BluePlayer_Steps [3]) > selectDiceNumAnimation) 
 			{
 				if (BluePlayer_Steps [3] > 0) 
@@ -1113,120 +1370,129 @@ namespace Photon.Pun.UtilityScripts
 				}
 			}
 		}
-
-
-
-
-
 		public string temp;
 
 		public void BluePlayerI_UI_Method()
 		{
 			//this method calls the BluePlayerI_UI() by sending the RandomNumber and MethodName;
+			if (isMyTurn && playerTurn.Equals ("BLUE")) {
+				DisablingButtonsOFBluePlayes ();
+				DisablingBordersOFBluePlayer ();
 
-			DisablingButtonsOFBluePlayes();
-			DisablingBordersOFBluePlayer ();
+				childNode.Add ("MethodName", "BluePlayerI_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			childNode.Add("MethodName","BluePlayerI_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
 		public void BluePlayerII_UI_Method()
 		{
 			//this method calls the BluePlayerII_UI() by sending the RandomNumber and MethodName;
-		
-			DisablingButtonsOFBluePlayes();
-			DisablingBordersOFBluePlayer ();
+			if (isMyTurn && playerTurn.Equals ("BLUE")) {
+				DisablingButtonsOFBluePlayes ();
+				DisablingBordersOFBluePlayer ();
 
-			childNode.Add("MethodName","BluePlayerII_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("MethodName", "BluePlayerII_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
 		public void BluePlayerIII_UI_Method()
 		{
 			//this method calls the BluePlayerIII_UI() by sending the RandomNumber and MethodName;
+			if (isMyTurn && playerTurn.Equals ("BLUE")) {
+				DisablingButtonsOFBluePlayes ();
+				DisablingBordersOFBluePlayer ();
 
-			DisablingButtonsOFBluePlayes();
-			DisablingBordersOFBluePlayer ();
+				childNode.Add ("MethodName", "BluePlayerIII_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			childNode.Add("MethodName","BluePlayerIII_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
 		public void BluePlayerIV_UI_Method()
 		{
 			//this method calls the BluePlayerIV_UI() by sending the RandomNumber and MethodName;
+			if (isMyTurn && playerTurn.Equals ("BLUE")) {
+				DisablingButtonsOFBluePlayes ();
+				DisablingBordersOFBluePlayer ();
 
-			DisablingButtonsOFBluePlayes();
-			DisablingBordersOFBluePlayer ();
+				childNode.Add ("MethodName", "BluePlayerIV_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			childNode.Add("MethodName","BluePlayerIV_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
 
 		public void GreenPlayerI_UI_Method()
 		{
 			//this method calls the GreenPlayerI_UI() by sending the RandomNumber and MethodName;
+			if (isMyTurn && playerTurn.Equals ("GREEN")) {
+				DisablingBordersOFGreenPlayer ();
+				DisablingButtonsOfGreenPlayers ();
 
-			DisablingBordersOFGreenPlayer ();
-			DisablingButtonsOfGreenPlayers ();
+				childNode.Add ("MethodName", "GreenPlayerI_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			childNode.Add("MethodName","GreenPlayerI_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
 		public void GreenPlayerII_UI_Method()
 		{
 			//this method calls the GreenPlayerII_UI() by sending the RandomNumber and MethodName;
-		
-			DisablingBordersOFGreenPlayer ();
-			DisablingButtonsOfGreenPlayers ();
+			if (isMyTurn && playerTurn.Equals ("GREEN")) {
+				DisablingBordersOFGreenPlayer ();
+				DisablingButtonsOfGreenPlayers ();
 
-			childNode.Add("MethodName","GreenPlayerII_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("MethodName", "GreenPlayerII_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
 		public void GreenPlayerIII_UI_Method()
 		{
 			//this method calls the GreenPlayerIII_UI() by sending the RandomNumber and MethodName;
+			if (isMyTurn && playerTurn.Equals ("GREEN")) {
+				DisablingBordersOFGreenPlayer ();
+				DisablingButtonsOfGreenPlayers ();
 
-			DisablingBordersOFGreenPlayer ();
-			DisablingButtonsOfGreenPlayers ();
+				childNode.Add ("MethodName", "GreenPlayerIII_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			childNode.Add("MethodName","GreenPlayerIII_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
 		public void GreenPlayerIV_UI_Method()
 		{
 			//this method calls the GreenPlayerIV_UI() by sending the RandomNumber and MethodName;
+			if (isMyTurn && playerTurn.Equals ("GREEN")) {
+				DisablingBordersOFGreenPlayer ();
+				DisablingButtonsOfGreenPlayers ();
 
-			DisablingBordersOFGreenPlayer ();
-			DisablingButtonsOfGreenPlayers ();
+				childNode.Add ("MethodName", "GreenPlayerIV_UI");
+				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
+				childNode.Add ("Wait", "2.5");
 
-			childNode.Add("MethodName","GreenPlayerIV_UI");
-			childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-
-			temp = childNode.ToString ();
-			this.MakeTurn (temp);
+				temp = childNode.ToString ();
+				this.MakeTurn (temp);
+			}
 		}
-
-
 		void MovingBlueOrGreenPlayer(GameObject Player,Vector3[] path)
 		{
 			if (path.Length > 1) 
@@ -1284,9 +1550,6 @@ namespace Photon.Pun.UtilityScripts
 				EnableFrameAndBorderForFirstTime ();
 			}
 		}
-
-
-
 		public void MakeTurn(string data)
 		{
 			string temp1 = null;
@@ -1309,145 +1572,131 @@ namespace Photon.Pun.UtilityScripts
 				this.MakeTurn (temp);
 			}
 		}
-		/// <summary>
-		/// Called when a turn is completed (finished by all players)
-		/// </summary>
-		/// </param name="turn">Turn Index</param>
 		public void OnTurnCompleted(int turn)
-		{
-			
-		}
-		/// <summary>
-		/// Called when a player moved (but did not finish the turn)
-		/// </summary>
-		/// <param name="player">Player reference</param>
-		/// <param name="turn">Turn Index</param>
-		/// <param name="move">Move Object data</param>
+		{}
 		public void OnPlayerMove(Player player, int turn, object move)
-		{
-			
-		}
-
-		/// <summary>
-		/// When a player finishes a turn (includes the action/move of that player)
-		/// </summary>
-		/// <param name="player">Player reference</param>
-		/// <param name="turn">Turn index</param>
-		/// <param name="move">Move Object data</param>
+		{}
 		public void OnPlayerFinished(Player player, int turn, object move)
 		{
 			print ("OnPlayerFinished(Player player, int turn, object move) PlayerName:"+player.NickName);
 			temp = move as string;
 
 			print ("Temp" + temp);
-			if (temp.Contains ("None")) 
-			{
-				print ("Noting to Happen");	
-				PlayerCanPlayAgain = false;
-				ActualPlayerCanPlayAgain = false;
-			}
-			else if (temp.Contains ("DiceNumber")) 
+			if (temp.Contains ("DiceNumber"))
 			{
 				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
+				print (jn [0]);
 				int Place = int.Parse (jn ["DiceNumber"].Value);
+				print ("Sending DiceNumber");
 				StartCoroutine (DiceToss (Place));
 			}
 
 			//=====================for BluePlayer====================
-			else if (temp.Contains ("BluePlayerI_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				BluePlayerI_UI ();
-			}
-			else if (temp.Contains ("BluePlayerII_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				BluePlayerII_UI ();
-			}
-			else if (temp.Contains ("BluePlayerIII_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				BluePlayerIII_UI ();
-			}
-			else if (temp.Contains ("BluePlayerIV_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				BluePlayerIV_UI ();
-			}
-				
-			//================for GreenPlayer================
-			else if (temp.Contains ("GreenPlayerI_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				GreenPlayerI_UI ();
-			}
-			else if (temp.Contains ("GreenPlayerII_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				GreenPlayerII_UI ();
-			}
-			else if (temp.Contains ("GreenPlayerIII_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				GreenPlayerIII_UI ();
-			}
-			else if (temp.Contains ("GreenPlayerIV_UI")) 
-			{
-				JSONNode jn = SimpleJSON.JSONData.Parse (temp);
-				int Place = int.Parse (jn ["RandomNumber"].Value);
-				selectDiceNumAnimation = Place;
-				GreenPlayerIV_UI ();
-			}
+
+			JSONNode jn1 = SimpleJSON.JSONData.Parse (temp);
+			string temp1 = temp;
 			temp = null;
+			int Place1=0;
+			print (jn1 [0]);
+			switch (jn1 [0]) 
+			{
+
+			case "BluePlayerI_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				BluePlayerI_UI ();
+				break;
+			case "BluePlayerII_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				BluePlayerII_UI ();
+				break;
+			case "BluePlayerIII_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				BluePlayerIII_UI ();
+				break;
+			case "BluePlayerIV_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				BluePlayerIV_UI ();
+				break;
+			case "GreenPlayerI_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				GreenPlayerI_UI ();
+				break;
+			case "GreenPlayerII_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				GreenPlayerII_UI ();
+				break;
+			case "GreenPlayerIII_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				GreenPlayerIII_UI ();
+				break;
+			case "GreenPlayerIV_UI":
+				Place1 = int.Parse (jn1 ["RandomNumber"].Value);
+				selectDiceNumAnimation = Place1;
+				GreenPlayerIV_UI ();
+				break;
+			}
+
 			if (player.IsLocal) 
 			{
 				print ("(player.IsLocal) ");
 				isMyTurn = false;
-				PlayerCanPlayAgain=false;
+				PlayerCanPlayAgain = false;
 			}
 			else
 			{
-				StartCoroutine (WaitForSomeTime ());
-				print ("StartCoroutine (WaitForSomeTime ())");
+				StartCoroutine (WaitForSomeTime (temp1));
+
 			}
 		}
-					
-		IEnumerator WaitForSomeTime()
+			
+		IEnumerator WaitForSomeTime(string temp1)
 		{
-			yield return new WaitForSeconds (3);
-			isMyTurn = true;
-			if(PlayerCanPlayAgain)
+			print ("StartCoroutine (WaitForSomeTime ())");
+			print ("PlayerCanPlayAgain:" + PlayerCanPlayAgain);
+			JSONNode jn = SimpleJSON.JSONData.Parse (temp1);
+
+
+			string WhatToDo = jn ["WaitingTime"].Value;
+			print(jn ["WaitingTime"].Value);
+			float WaitingTime = 0;
+			if (jn ["WaitingTime"].Value.Equals("Skip")) {
+				print ("Skipping turn");
+				ActualPlayerCanPlayAgain = true;
+				WaitingTime = 0;
+				WhatToDo = null;
+			}
+			else 
 			{
-				ActualPlayerCanPlayAgain=true;
-				PlayerCanPlayAgain=false;
+				WaitingTime = .5f;
+			}
+			if (jn ["Wait"].Value.Equals ("2.5")) 
+			{
+				WaitingTime = 2.5f;
+			}
+			if (PlayerCanPlayAgain == true) 
+			{
+				ActualPlayerCanPlayAgain = true;
+				PlayerCanPlayAgain = false;
+			}
+			yield return new WaitForSeconds (WaitingTime);
+			isMyTurn = true;
+			if (PlayerCanPlayAgain == true) 
+			{
+				ActualPlayerCanPlayAgain = true;
+				PlayerCanPlayAgain = false;
 			}
 			if (PhotonNetwork.IsMasterClient)
 			{
 				StartTurn ();
 			}
 		}
-
-
-
-
-		/// <summary>
-		/// Called when a turn completes due to a time constraint (timeout for a turn)
-		/// </summary>
-		/// <param name="turn">Turn index</param>
 		public void OnTurnTimeEnds(int turn)
 		{
 			OnTurnCompleted (-1);
@@ -1504,6 +1753,11 @@ namespace Photon.Pun.UtilityScripts
 				BlankTurn.Add ("None", ""+0);
 				temp = BlankTurn.ToString ();
 				this.MakeTurn (temp);
+			}
+			if (isMyTurn == false) {
+				DiceRollButton.interactable = false;
+			} else {
+				DiceRollButton.interactable = true;
 			}
 		}
 	}

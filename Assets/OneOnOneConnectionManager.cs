@@ -46,6 +46,10 @@ namespace Photon.Pun.Demo.Cockpit
 		public override void OnJoinedRoom()
 		{
 			print ("Room Joined successfully");
+			if (PhotonNetwork.PlayerList.Length == 2) 
+			{
+				isRemote = true;
+			}
 			SceneManager.LoadScene ("OneOnOneGameBoard");
 		}
 		// Update is called once per frame
