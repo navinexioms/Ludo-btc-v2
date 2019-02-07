@@ -14,9 +14,20 @@ namespace Photon.Pun.UtilityScripts
 	{
 		private PunTurnManager turnManager;
 
+		public int TriggeredTime;
+		public int TriggerCounter;
+
 		JSONNode rootNode=new JSONClass();
 		JSONNode childNode = new JSONClass ();
 		JSONNode BlankTurn = new JSONClass ();
+
+		public Image TimerImage;
+
+		public Image ImageOne;
+		public Image ImageTwo;
+
+		public Vector3 TimerOnePosition;
+		public Vector3 TimerTwoPosition;
 
 		public GameObject GameOver;
 		public Text GameOverText;
@@ -268,15 +279,18 @@ namespace Photon.Pun.UtilityScripts
 			{
 				diceRoll.position = BlueDiceRollPosition.position;
 				DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [6];
+				TimerImage.transform.position = TimerOnePosition;
 				EnablingBluePlayersRaycast ();
 				DisablingGreenPlayerRaycast ();
 				BlueFrame.SetActive (true);
 				GreenFrame.SetActive (false);
+				TimerImage.fillAmount = 1;
 			}
 			if (playerTurn == "GREEN") 
 			{
 				diceRoll.position = GreenDiceRollPosition.position;
 				DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [6];
+				TimerImage.transform.position = TimerTwoPosition;
 				EnablingGreenPlayerRaycast ();
 				DisablingBluePlayersRaycast ();
 				BlueFrame.SetActive (false);
@@ -288,6 +302,7 @@ namespace Photon.Pun.UtilityScripts
 			DisablingBordersOFGreenPlayer ();
 			DisablingButtonsOfGreenPlayers ();
 			selectDiceNumAnimation = 0;
+			TimerImage.fillAmount = 1;
 		}
 
 		public void DiceRoll()
@@ -1510,6 +1525,7 @@ namespace Photon.Pun.UtilityScripts
 			GameObject OneOnOneConnectionManagerController = GameObject.Find ("SceneSWitchController");
 			this.turnManager = this.gameObject.AddComponent<PunTurnManager> ();
 			this.turnManager.TurnManagerListener = this;
+			this.turnManager.TurnDuration = 30f;
 			string name = null;
 			if(PhotonNetwork.InRoom)
 				name=PhotonNetwork.CurrentRoom.Name;
@@ -1518,6 +1534,9 @@ namespace Photon.Pun.UtilityScripts
 			QualitySettings.vSyncCount = 1;
 			Application.targetFrameRate = 30;
 			randomNo = new System.Random ();
+
+			TimerOnePosition = ImageOne.transform.position;
+			TimerTwoPosition = ImageTwo.transform.position;
 
 			//Player initial positions...........
 			BluePlayers_Pos[0]=BluePlayerI.transform.position;
@@ -1578,6 +1597,7 @@ namespace Photon.Pun.UtilityScripts
 		{}
 		public void OnPlayerFinished(Player player, int turn, object move)
 		{
+			TriggeredTime = 0;
 			print ("OnPlayerFinished(Player player, int turn, object move) PlayerName:"+player.NickName);
 			temp = move as string;
 
@@ -1699,7 +1719,7 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public void OnTurnTimeEnds(int turn)
 		{
-			OnTurnCompleted (-1);
+			
 		}
 		#endregion
 		public void StartTurn()
@@ -1724,11 +1744,6 @@ namespace Photon.Pun.UtilityScripts
 			GreenPlayerIV.SetActive (true);
 
 			BlueFrame.SetActive (true);
-
-			BluePlayerI_Border.SetActive (true);
-			BluePlayerII_Border.SetActive (true);
-			BluePlayerIII_Border.SetActive (true);
-			BluePlayerIV_Border.SetActive (true);
 		}
 		public override void OnPlayerEnteredRoom(Player newPlayer)
 		{
@@ -1746,11 +1761,19 @@ namespace Photon.Pun.UtilityScripts
 		}
 		void Update()
 		{
-			if (ActualPlayerCanPlayAgain == true && isMyTurn==true && !PhotonNetwork.IsMasterClient) 
-			{
+//			print ("Remaining time" + this.turnManager.RemainingSecondsInTurn+" TurnDuration:"+this.turnManager.TurnDuration+"Turn Value:"+this.turnManager.Turn);
+
+			SendBlankTurn ();
+
+			PassTurn ();
+
+		}
+		void SendBlankTurn()
+		{
+			if (ActualPlayerCanPlayAgain == true && isMyTurn == true && !PhotonNetwork.IsMasterClient) {
 				print ("Sending Blank Turn" + " isMyTurn" + isMyTurn);
 				ActualPlayerCanPlayAgain = false;
-				BlankTurn.Add ("None", ""+0);
+				BlankTurn.Add ("None", "" + 0);
 				temp = BlankTurn.ToString ();
 				this.MakeTurn (temp);
 			}
@@ -1758,6 +1781,25 @@ namespace Photon.Pun.UtilityScripts
 				DiceRollButton.interactable = false;
 			} else {
 				DiceRollButton.interactable = true;
+			}
+		}
+		void PassTurn()
+		{
+			if (isMyTurn && PhotonNetwork.PlayerList.Length == 2) {
+				if (TriggerCounter < 1) 
+				{
+					TriggerCounter += 1;
+					TriggeredTime = 30;
+				}
+				if (TriggerCounter == 1) 
+				{
+					TimerImage.fillAmount -= 1.0f / TriggeredTime * Time.deltaTime;
+				}
+				if (TimerImage.fillAmount == 0) {
+					BlankTurn.Add ("None1", "Pass");
+					temp = BlankTurn.ToString ();
+					this.MakeTurn (temp);
+				}
 			}
 		}
 	}

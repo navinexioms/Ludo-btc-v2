@@ -47,7 +47,7 @@ namespace Photon.Pun.UtilityScripts
         /// <summary>
         /// The duration of the turn in seconds.
         /// </summary>
-        public float TurnDuration = 20f;
+        public float TurnDuration = 30f;
 
         /// <summary>
         /// Gets the elapsed time in the current turn in seconds
