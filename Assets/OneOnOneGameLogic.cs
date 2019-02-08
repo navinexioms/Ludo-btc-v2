@@ -18,6 +18,11 @@ namespace Photon.Pun.UtilityScripts
 		public int TriggerCounter;
 		public int timer;
 
+		public GameObject DisconnectPanel;
+		public Text DisconnectText;
+		public GameObject ReconnectButton;
+
+
 		JSONNode rootNode=new JSONClass();
 		JSONNode childNode = new JSONClass ();
 		JSONNode BlankTurn = new JSONClass ();
@@ -1584,9 +1589,16 @@ namespace Photon.Pun.UtilityScripts
 			playerTurn = "BLUE";
 			BlueFrame.SetActive (false);
 			GreenFrame.SetActive (false);
-			if (PhotonNetwork.PlayerList.Length == 2) 
-			{
+
+			TimerImage.transform.position = TimerOnePosition;
+			diceRoll.position = BlueDiceRollPosition.position;
+
+			if (PhotonNetwork.PlayerList.Length == 2) {
 				EnableFrameAndBorderForFirstTime ();
+			} else if (PhotonNetwork.PlayerList.Length == 1) {
+				DisconnectPanel.SetActive (true);
+				ReconnectButton.SetActive(false);
+				DisconnectText.text="WAIT FOR A WHILE TO CONNECT OTHER PLAYER";
 			}
 		}
 		public void MakeTurn(string data)
@@ -1784,21 +1796,72 @@ namespace Photon.Pun.UtilityScripts
 		public override void OnPlayerEnteredRoom(Player newPlayer)
 		{
 			Debug.Log("Other player arrived turn = "+ this.turnManager.Turn );
-//			PlayerCounter++;
 			print ("PlayerCounter:" + PhotonNetwork.CountOfPlayersInRooms);
-			if (PhotonNetwork.PlayerList.Length==2)
-			{
-				if (this.turnManager.Turn == 0)
-				{
+			if (PhotonNetwork.PlayerList.Length == 2) {
+				ReconnectButton.SetActive (false);
+				DisconnectText.text=null;
+				DisconnectPanel.SetActive (false);
+				if (this.turnManager.Turn == 0) {
 					isMyTurn = true;
 				}
 				EnableFrameAndBorderForFirstTime ();
 			}
 		}
+
+		public void OnClickReconnectAndReJoin()
+		{
+			print ("Attempting to rejoin the room");
+			PhotonNetwork.ReconnectAndRejoin ();
+		}
+
+		public override void OnLeftRoom ()
+		{
+			print ("Player left the room");
+//			base.OnLeftRoom ();
+		}
+
+		public override void OnJoinedRoom ()
+		{
+			DisconnectText.text = null;
+			ReconnectButton.SetActive (false);
+			DisconnectPanel.SetActive (false);
+		}
+
+		public override void OnPlayerLeftRoom (Photon.Realtime.Player otherPlayer)
+		{	
+//			base.OnPlayerLeftRoom (otherPlayer);
+			print ("Player Disconnected");
+			TriggeredTime = 0;
+			TriggerCounter = 0;
+			timer = 0;
+			TimerImage.fillAmount = 1;
+			DisconnectPanel.SetActive (true);
+			ReconnectButton.SetActive (false);
+			DisconnectText.text = null;
+			DisconnectText.text = "OTHER PLAYER IS DISCONNECTED, WAIT FOR A WHILE TO RECONNECT OTHER PLAYER";
+		}
+
+		public override void OnDisconnected (DisconnectCause cause)
+		{
+			//Enable Reconnection Panel and Reset all the all the values of image and counters
+			TriggeredTime = 0;
+			TriggerCounter = 0;
+			timer = 0;
+			TimerImage.fillAmount = 1;
+			DisconnectPanel.SetActive (true);
+			DisconnectText.text = "DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
+			ReconnectButton.SetActive (true);
+//			base.OnDisconnected (cause);
+		}
+
 		void Update()
 		{
 //			print ("Remaining time" + this.turnManager.RemainingSecondsInTurn+" TurnDuration:"+this.turnManager.TurnDuration+"Turn Value:"+this.turnManager.Turn);
 
+			if (!PhotonNetwork.InRoom) 
+			{
+				return;
+			}
 			SendBlankTurn ();
 
 			PassTurn ();

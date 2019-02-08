@@ -20,6 +20,13 @@ namespace Photon.Pun.Demo.Cockpit
 	// Use this for initialization
 		public void CreateRoomMethod()
 		{
+			if (PhotonNetwork.AuthValues == null) 
+			{
+				PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
+			}
+			int num = 0;
+			num = Random.Range (1, 10000);
+			PhotonNetwork.AuthValues.UserId = "" + num;
 			PhotonNetwork.ConnectUsingSettings ();
 		}
 		public override void OnConnectedToMaster()
@@ -51,6 +58,16 @@ namespace Photon.Pun.Demo.Cockpit
 				isRemote = true;
 			}
 			SceneManager.LoadScene ("OneOnOneGameBoard");
+		}
+		public override void OnJoinRoomFailed (short returnCode, string message)
+		{
+			print ("OnJoinRoomFailed (short returnCode, string message)");
+//			base.OnJoinRoomFailed (returnCode, message);
+		}
+		public override void OnDisconnected (Photon.Realtime.DisconnectCause cause)
+		{
+			print (cause);
+//			base.OnDisconnected (cause);
 		}
 		// Update is called once per frame
 	}
