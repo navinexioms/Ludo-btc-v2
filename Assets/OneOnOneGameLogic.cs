@@ -16,6 +16,7 @@ namespace Photon.Pun.UtilityScripts
 
 		public int TriggeredTime;
 		public int TriggerCounter;
+		public int timer;
 
 		JSONNode rootNode=new JSONClass();
 		JSONNode childNode = new JSONClass ();
@@ -449,13 +450,9 @@ namespace Photon.Pun.UtilityScripts
 					rootNode.Add ("WaitingTime", "Skip");
 					temp = rootNode.ToString ();
 					print ("Border glowing");
-
 				} else {
 					GreenPlayerI_Border.SetActive (false);
 					GreenPlayerI_Button.interactable = false;
-					rootNode.Add ("WaitingTime", "DontSkip");
-					temp = rootNode.ToString ();
-					print ("not Skipping");
 				}
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [1]) >= selectDiceNumAnimation && GreenPlayer_Steps [1] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [1])) {
 					GreenPlayerII_Border.SetActive (true);
@@ -466,9 +463,6 @@ namespace Photon.Pun.UtilityScripts
 				} else {
 					GreenPlayerII_Border.SetActive (false);
 					GreenPlayerII_Button.interactable = false;
-					rootNode.Add ("WaitingTime", "DontSkip");
-					temp = rootNode.ToString ();
-					print ("not Skipping");
 				}
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [2]) >= selectDiceNumAnimation && GreenPlayer_Steps [2] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [2])) {
 					GreenPlayerIII_Border.SetActive (true);
@@ -479,9 +473,6 @@ namespace Photon.Pun.UtilityScripts
 				} else {
 					GreenPlayerIII_Border.SetActive (false);
 					GreenPlayerIII_Button.interactable = false;
-					rootNode.Add ("WaitingTime", "DontSkip");
-					temp = rootNode.ToString ();
-					print ("not Skipping");
 				}
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [3]) >= selectDiceNumAnimation && GreenPlayer_Steps [3] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [3])) {
 					GreenPlayerIV_Border.SetActive (true);
@@ -492,9 +483,6 @@ namespace Photon.Pun.UtilityScripts
 				} else {
 					GreenPlayerIV_Border.SetActive (false);
 					GreenPlayerIV_Button.interactable = false;
-					rootNode.Add ("WaitingTime", "DontSkip");
-					temp = rootNode.ToString ();
-					print ("not Skipping");
 				}
 
 				//===============Players border glow When Opening===============//
@@ -801,7 +789,12 @@ namespace Photon.Pun.UtilityScripts
 					totalBlueInHouse += 1;
 					print ("Cool");
 					BluePlayerI_Button.enabled = false;
-					if (totalBlueInHouse < 3) {
+
+					if (PhotonNetwork.IsMasterClient) {
+
+					}
+					else 
+					{
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -880,7 +873,11 @@ namespace Photon.Pun.UtilityScripts
 					totalBlueInHouse += 1;
 					print ("Cool");
 					BluePlayerII_Button.enabled = false;
-					if (totalBlueInHouse < 3) {
+					if (PhotonNetwork.IsMasterClient) {
+
+					}
+					else 
+					{
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -958,7 +955,11 @@ namespace Photon.Pun.UtilityScripts
 					totalBlueInHouse += 1;
 					print ("Cool");
 					BluePlayerIII_Button.enabled = false;
-					if (totalBlueInHouse < 3) {
+					if (PhotonNetwork.IsMasterClient) {
+
+					}
+					else 
+					{
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -1038,7 +1039,11 @@ namespace Photon.Pun.UtilityScripts
 					totalBlueInHouse += 1;
 					print ("Cool");
 					BluePlayerIV_Button.enabled = false;
-					if (totalBlueInHouse < 3) {
+					if (PhotonNetwork.IsMasterClient) {
+
+					}
+					else 
+					{
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -1123,8 +1128,12 @@ namespace Photon.Pun.UtilityScripts
 					totalGreenInHouse += 1;
 					print ("Cool");
 					GreenPlayerI_Button.enabled = false;
-					if (totalGreenInHouse < 3) {
+					if (PhotonNetwork.IsMasterClient) {
 						PlayerCanPlayAgain = true;
+					}
+					else 
+					{
+
 					}
 				}
 				else 
@@ -1205,8 +1214,12 @@ namespace Photon.Pun.UtilityScripts
 					totalGreenInHouse += 1;
 					print ("Cool");
 					GreenPlayerII_Button.enabled = false;
-					if (totalGreenInHouse < 3) {
+					if (PhotonNetwork.IsMasterClient) {
 						PlayerCanPlayAgain = true;
+					}
+					else 
+					{
+
 					}
 				}
 				else 
@@ -1288,8 +1301,12 @@ namespace Photon.Pun.UtilityScripts
 					totalGreenInHouse += 1;
 					print ("Cool");
 					GreenPlayerIV_Button.enabled = false;
-					if (totalGreenInHouse < 3) {
+					if (PhotonNetwork.IsMasterClient) {
 						PlayerCanPlayAgain = true;
+					}
+					else 
+					{
+
 					}
 				}
 				else 
@@ -1370,8 +1387,12 @@ namespace Photon.Pun.UtilityScripts
 					totalGreenInHouse += 1;
 					print ("Cool");
 					GreenPlayerIV_Button.enabled = false;
-					if (totalGreenInHouse < 3) {
+					if (PhotonNetwork.IsMasterClient) {
 						PlayerCanPlayAgain = true;
+					}
+					else 
+					{
+
 					}
 				}
 				else 
@@ -1525,7 +1546,6 @@ namespace Photon.Pun.UtilityScripts
 			GameObject OneOnOneConnectionManagerController = GameObject.Find ("SceneSWitchController");
 			this.turnManager = this.gameObject.AddComponent<PunTurnManager> ();
 			this.turnManager.TurnManagerListener = this;
-			this.turnManager.TurnDuration = 30f;
 			string name = null;
 			if(PhotonNetwork.InRoom)
 				name=PhotonNetwork.CurrentRoom.Name;
@@ -1597,7 +1617,7 @@ namespace Photon.Pun.UtilityScripts
 		{}
 		public void OnPlayerFinished(Player player, int turn, object move)
 		{
-			TriggeredTime = 0;
+			
 			print ("OnPlayerFinished(Player player, int turn, object move) PlayerName:"+player.NickName);
 			temp = move as string;
 
@@ -1614,6 +1634,22 @@ namespace Photon.Pun.UtilityScripts
 			//=====================for BluePlayer====================
 
 			JSONNode jn1 = SimpleJSON.JSONData.Parse (temp);
+			if (jn1 [0].Value.Equals ("Master")) {
+				TriggeredTime = 0;
+				TriggerCounter = 0;
+				timer = 0;
+				TimerImage.fillAmount = 1;
+				TimerImage.transform.position = TimerTwoPosition;
+				diceRoll.position = GreenDiceRollPosition.position;
+			} 
+			if (jn1 [0].Value.Equals ("Remote")) {
+				TriggeredTime = 0;
+				TriggerCounter = 0;
+				timer = 0;
+				TimerImage.fillAmount = 1;
+				TimerImage.transform.position = TimerOnePosition;
+				diceRoll.position = BlueDiceRollPosition.position;
+			}
 			string temp1 = temp;
 			temp = null;
 			int Place1=0;
@@ -1789,14 +1825,22 @@ namespace Photon.Pun.UtilityScripts
 				if (TriggerCounter < 1) 
 				{
 					TriggerCounter += 1;
-					TriggeredTime = 30;
+					TriggeredTime = (int)Time.time;
 				}
-				if (TriggerCounter == 1) 
+				if (TriggerCounter == 1 && timer!=21) 
 				{
-					TimerImage.fillAmount -= 1.0f / TriggeredTime * Time.deltaTime;
+					TimerImage.fillAmount -= 1.0f / 20 * Time.deltaTime;
+					timer = (int)Time.time - TriggeredTime;
 				}
-				if (TimerImage.fillAmount == 0) {
-					BlankTurn.Add ("None1", "Pass");
+				if (TimerImage.fillAmount == 0 && timer==21) {
+					print ("Sending Blank Turn");
+					string msg = null;
+					if (PhotonNetwork.IsMasterClient) {
+						msg = "Master";
+					} else {
+						msg = "Remote";
+					}
+					BlankTurn.Add ("None1", msg);
 					temp = BlankTurn.ToString ();
 					this.MakeTurn (temp);
 				}
