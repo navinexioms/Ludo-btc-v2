@@ -20,6 +20,7 @@ public class ExtraSceneController : MonoBehaviour
 	}
 	public void LoadBettingAmountScene()
 	{
+		
 		SceneManager.LoadScene ("BettingAmountScene");
 	}
 	public void LoadColorPickingScene()
