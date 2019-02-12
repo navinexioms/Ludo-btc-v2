@@ -27,6 +27,7 @@ namespace Photon.Pun.UtilityScripts
     /// </summary>
 	public class PunTurnManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
+		public bool CancelGame;
         /// <summary>
         /// Wraps accessing the "turn" custom properties of a room.
         /// </summary>
@@ -163,6 +164,7 @@ namespace Photon.Pun.UtilityScripts
             if (IsFinishedByMe)
             {
                 UnityEngine.Debug.LogWarning("Can't SendMove. Turn is finished by this player.");
+				CancelGame = true;
                 return;
             }
 

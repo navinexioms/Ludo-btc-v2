@@ -20,14 +20,16 @@ namespace Photon.Pun.Demo.Cockpit
 	// Use this for initialization
 		public void CreateRoomMethod()
 		{
-			if (PhotonNetwork.AuthValues == null) 
-			{
-				PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
+			if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) {
+				if (PhotonNetwork.AuthValues == null) {
+					PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
+				}
+//			int num = 0;
+//			num = Random.Range (2, 20000);
+				PhotonNetwork.AuthValues.UserId = "xyz";
+				PhotonNetwork.LocalPlayer.NickName = "xyz";
+				PhotonNetwork.ConnectUsingSettings ();
 			}
-			int num = 0;
-			num = Random.Range (1, 10000);
-			PhotonNetwork.AuthValues.UserId = "" + num;
-			PhotonNetwork.ConnectUsingSettings ();
 		}
 		public override void OnConnectedToMaster()
 		{
@@ -37,7 +39,7 @@ namespace Photon.Pun.Demo.Cockpit
 		public override void OnJoinedLobby()
 		{
 			print ("Joined lobby");
-			PhotonNetwork.CreateRoom ("nsd", new Photon.Realtime.RoomOptions{ MaxPlayers = 2, PlayerTtl = 20000 }, null);
+			PhotonNetwork.CreateRoom ("nsd", new Photon.Realtime.RoomOptions{MaxPlayers=2,PlayerTtl=300000,EmptyRoomTtl=1000} , null);
 		}
 		public override void OnCreatedRoom()
 		{
@@ -59,16 +61,16 @@ namespace Photon.Pun.Demo.Cockpit
 			}
 			SceneManager.LoadScene ("OneOnOneGameBoard");
 		}
-		public override void OnJoinRoomFailed (short returnCode, string message)
-		{
-			print ("OnJoinRoomFailed (short returnCode, string message)");
-//			base.OnJoinRoomFailed (returnCode, message);
-		}
-		public override void OnDisconnected (Photon.Realtime.DisconnectCause cause)
-		{
-			print (cause);
-//			base.OnDisconnected (cause);
-		}
+//		public override void OnJoinRoomFailed (short returnCode, string message)
+//		{
+//			print ("OnJoinRoomFailed (short returnCode, string message)");
+////			base.OnJoinRoomFailed (returnCode, message);
+//		}
+//		public override void OnDisconnected (Photon.Realtime.DisconnectCause cause)
+//		{
+//			print (cause);
+////			base.OnDisconnected (cause);
+//		}
 		// Update is called once per frame
 	}
 }

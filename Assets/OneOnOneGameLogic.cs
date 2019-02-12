@@ -17,9 +17,17 @@ namespace Photon.Pun.UtilityScripts
 		public int TriggeredTime;
 		public int TriggerCounter;
 		public int timer;
+		public int playerCounter;
+		public int DisconnectecdTriggeredTime;
+		public int DisconnectedTimer;
+
+		public bool flag,flag1;
 
 		public GameObject DisconnectPanel;
+		public GameObject WinPanel, LosePanel;
+
 		public Text DisconnectText;
+		public Text DisconnectText1;
 		public GameObject ReconnectButton;
 
 
@@ -160,8 +168,8 @@ namespace Photon.Pun.UtilityScripts
 		void InitializeDice()
 		{
 			print ("InitializeDice()");
-			//		print ("Dice interactable becomes true");
-//			print ("Dice interactable becomes true");
+			//	print ("Dice interactable becomes true");
+			//	print ("Dice interactable becomes true");
 			DiceRollButton.interactable = true;
 			DiceRollButton.GetComponent<Button> ().enabled = true;
 
@@ -172,6 +180,11 @@ namespace Photon.Pun.UtilityScripts
 				playerTurn = "none";
 				GameOver.SetActive (true);
 				GameOverText.text = "PLAYER WIN'S";
+				if (PhotonNetwork.IsMasterClient) {
+					WinPanel.SetActive (true);
+				} else {
+					LosePanel.SetActive (true);
+				}
 			}
 			if (totalGreenInHouse > 3) 
 			{
@@ -179,6 +192,11 @@ namespace Photon.Pun.UtilityScripts
 				playerTurn = "none";
 				GameOver.SetActive (true);
 				GameOverText.text = "AI WIN'S";
+				if (!PhotonNetwork.IsMasterClient) {
+					WinPanel.SetActive (true);
+				} else {
+					LosePanel.SetActive (true);
+				}
 			}
 
 			//=============getting currentPlayer Value===========//
@@ -192,8 +210,8 @@ namespace Photon.Pun.UtilityScripts
 					currentPlayer = BluePlayerIII_Script.BluePlayerIII_ColName;
 				if (currentPlayerName == "BLUE PLAYER IV") 
 					currentPlayer = BluePlayerIV_Script.BluePlayerIV_ColName;
-				//			print ("currentPlayerName:" + currentPlayerName);
-				//			print ("currentPlayer:" + currentPlayer);
+				//	print ("currentPlayerName:" + currentPlayerName);
+				//	print ("currentPlayer:" + currentPlayer);
 			}
 			if (currentPlayerName.Contains ("GREEN PLAYER"))
 			{
@@ -205,8 +223,8 @@ namespace Photon.Pun.UtilityScripts
 					currentPlayer = GreenPlayerIII_Script.GreenPlayerIII_ColName;
 				if (currentPlayerName == "GREEN PLAYER IV") 
 					currentPlayer = GreenPlayerIV_Script.GreenPlayerIV_ColName;
-				//			print ("currentPlayerName:" + currentPlayerName);
-				//			print ("currentPlayer:" + currentPlayer);
+				//	print ("currentPlayerName:" + currentPlayerName);
+				//	print ("currentPlayer:" + currentPlayer);
 			}
 
 			//============PLayer vs Opponent=============//
@@ -216,14 +234,14 @@ namespace Photon.Pun.UtilityScripts
 				if (currentPlayerName.Contains ("BLUE PLAYER")) 
 				{
 					for (i = 0; i < 4; i++) {
-						//					print ("Blue Player vs GreenPlayer");
+						//	print ("Blue Player vs GreenPlayer");
 						if ((i == 0 && currentPlayer == GreenPlayerI_Script.GreenPlayerI_ColName && (currentPlayer != "Star" && GreenPlayerI_Script.GreenPlayerI_ColName != "Star")) ||
 							(i == 1 && currentPlayer == GreenPlayerII_Script.GreenPlayerII_ColName && (currentPlayer != "Star" && GreenPlayerII_Script.GreenPlayerII_ColName != "Star")) ||
 							(i == 2 && currentPlayer == GreenPlayerIII_Script.GreenPlayerIII_ColName && (currentPlayer != "Star" && GreenPlayerIII_Script.GreenPlayerIII_ColName != "Star")) ||
 							(i == 3 && currentPlayer == GreenPlayerIV_Script.GreenPlayerIV_ColName && (currentPlayer != "Star" && GreenPlayerIV_Script.GreenPlayerIV_ColName != "Star"))) {
 							print (" BluePlayer  Beaten GreenPlayerI");
-							//							GreenPlayerI.transform.position = GreenPlayerI_Pos;
-							//							GreenPlayerI_Script.GreenPlayerI_ColName = "none";
+							//	GreenPlayerI.transform.position = GreenPlayerI_Pos;
+							//	GreenPlayerI_Script.GreenPlayerI_ColName = "none";
 							GreenPlayers [i].transform.position = GreenPlayers_Pos [i];
 							GreenPlayer_Steps [i] = 0;
 							playerTurn = "BLUE";
@@ -237,7 +255,7 @@ namespace Photon.Pun.UtilityScripts
 								GreenPlayerIV_Script.GreenPlayerIV_ColName = "none";
 							}
 							if (PhotonNetwork.IsMasterClient) {
-								
+
 							}
 							else 
 							{
@@ -249,7 +267,7 @@ namespace Photon.Pun.UtilityScripts
 
 				if (currentPlayerName.Contains ("GREEN PLAYER")) 
 				{
-					//				print ("GreenPlayer VS blue Player");
+					//	print ("GreenPlayer VS blue Player");
 					i = 0;
 					for (i = 0; i < 4; i++) {
 						if ((i == 0 && currentPlayer == BluePlayerI_Script.BluePlayerI_ColName && (currentPlayer != "Star" && BluePlayerI_Script.BluePlayerI_ColName != "Star")) ||
@@ -274,7 +292,7 @@ namespace Photon.Pun.UtilityScripts
 							}
 							else 
 							{
-								
+
 							}
 						}
 					}
@@ -325,7 +343,7 @@ namespace Photon.Pun.UtilityScripts
 
 				StartCoroutine (PlayersNotInitializedForTimeDelay (temp));
 
-//				this.MakeTurn (temp);//This will not be called first
+				//	this.MakeTurn (temp);//This will not be called first
 
 
 			}
@@ -427,7 +445,7 @@ namespace Photon.Pun.UtilityScripts
 				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
 
 				if (!BluePlayerI_Border.activeInHierarchy && !BluePlayerII_Border.activeInHierarchy &&
-				    !BluePlayerIII_Border.activeInHierarchy && !BluePlayerIV_Border.activeInHierarchy) {
+					!BluePlayerIII_Border.activeInHierarchy && !BluePlayerIV_Border.activeInHierarchy) {
 					rootNode.Add ("WaitingTime", "DontSkip");
 					temp = rootNode.ToString ();
 					print ("not Skipping");
@@ -444,7 +462,7 @@ namespace Photon.Pun.UtilityScripts
 
 				BluePlayerIV_Border.SetActive (false);
 				BluePlayerIV_Button.interactable = false;
-			
+
 				break;
 			case "GREEN":
 				//=============condition for border glow=============
@@ -563,7 +581,7 @@ namespace Photon.Pun.UtilityScripts
 			}
 			DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [DiceNumber-1];
 			selectDiceNumAnimation = DiceNumber;
-//			print ("selectDiceNumAnimation:" + selectDiceNumAnimation);
+			//	print ("selectDiceNumAnimation:" + selectDiceNumAnimation);
 			StartCoroutine (PlayersNotInitialized ());
 		}
 
@@ -572,7 +590,7 @@ namespace Photon.Pun.UtilityScripts
 
 		IEnumerator PlayersNotInitialized()
 		{
-//			print ("Executing PlayersNotInitialized()");
+			//	print ("Executing PlayersNotInitialized()");
 			yield return new WaitForSeconds (.8f);
 			//game start initial position of each player(green and blue)
 			switch (playerTurn) 
@@ -583,7 +601,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [0]) >= selectDiceNumAnimation && BluePlayer_Steps [0] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [0])) {
 					BluePlayerI_Border.SetActive (true);
 					BluePlayerI_Button.interactable = true;
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerI_Border.SetActive (false);
 					BluePlayerI_Button.interactable = false;
@@ -591,7 +609,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [1]) >= selectDiceNumAnimation && BluePlayer_Steps [1] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [1])) {
 					BluePlayerII_Border.SetActive (true);
 					BluePlayerII_Button.interactable = true;
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerII_Border.SetActive (false);
 					BluePlayerII_Button.interactable = false;
@@ -599,7 +617,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [2]) >= selectDiceNumAnimation && BluePlayer_Steps [2] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [2])) {
 					BluePlayerIII_Border.SetActive (true);
 					BluePlayerIII_Button.interactable = true;
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerIII_Border.SetActive (false);
 					BluePlayerIII_Button.interactable = false;
@@ -607,7 +625,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [3]) >= selectDiceNumAnimation && BluePlayer_Steps [3] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [3])) {
 					BluePlayerIV_Border.SetActive (true);
 					BluePlayerIV_Button.interactable = true;
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerIV_Border.SetActive (false);
 					BluePlayerIV_Button.interactable = false;
@@ -634,7 +652,7 @@ namespace Photon.Pun.UtilityScripts
 						BluePlayerIV_Border.SetActive (true);
 						BluePlayerIV_Button.interactable = true;
 					}
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 				}	
 				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
 
@@ -642,7 +660,7 @@ namespace Photon.Pun.UtilityScripts
 					!BluePlayerIII_Border.activeInHierarchy && !BluePlayerIV_Border.activeInHierarchy)
 				{
 					DisablingButtonsOFBluePlayes ();
-//					print ("PLAYERS DON'T HAVE OPTION TO MOVE , SWITCH TO NEXT PLAYER TURN");
+					//	print ("PLAYERS DON'T HAVE OPTION TO MOVE , SWITCH TO NEXT PLAYER TURN");
 
 					playerTurn = "GREEN";
 					InitializeDice ();
@@ -654,7 +672,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [0]) >= selectDiceNumAnimation && GreenPlayer_Steps [0] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [0])) {
 					GreenPlayerI_Border.SetActive (true);
 					GreenPlayerI_Button.interactable = true;
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 
 					print ("Glowing 1st green Player");
 				} else {
@@ -665,7 +683,7 @@ namespace Photon.Pun.UtilityScripts
 					GreenPlayerII_Border.SetActive (true);
 					GreenPlayerII_Button.interactable = true;
 					print ("Glowing 2nd green Player");
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 				} else {
 					GreenPlayerII_Border.SetActive (false);
 					GreenPlayerII_Button.interactable = false;
@@ -673,7 +691,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [2]) >= selectDiceNumAnimation && GreenPlayer_Steps [2] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [2])) {
 					GreenPlayerIII_Border.SetActive (true);
 					GreenPlayerIII_Button.interactable = true;
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 					print ("Glowing 3rd green Player");
 				} else {
 					GreenPlayerIII_Border.SetActive (false);
@@ -682,7 +700,7 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [3]) >= selectDiceNumAnimation && GreenPlayer_Steps [3] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [3])) {
 					GreenPlayerIV_Border.SetActive (true);
 					GreenPlayerIV_Button.interactable = true;
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 					print ("Glowing 4th green Player");
 				} else {
 					GreenPlayerIV_Border.SetActive (false);
@@ -712,7 +730,7 @@ namespace Photon.Pun.UtilityScripts
 						GreenPlayerIV_Border.SetActive (true);
 						GreenPlayerIV_Button.interactable = true;
 					}
-//					PlayerCanPlayAgain = true;
+					//	PlayerCanPlayAgain = true;
 				}
 				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
 
@@ -727,7 +745,7 @@ namespace Photon.Pun.UtilityScripts
 				break;
 			}
 		}
-			
+
 
 		public void BluePlayerI_UI()
 		{
@@ -769,7 +787,7 @@ namespace Photon.Pun.UtilityScripts
 						BluePlayer_Steps [0] += 1;
 						playerTurn = "BLUE";
 						currentPlayerName = "BLUE PLAYER I";
-						iTween.MoveTo (BluePlayerI, iTween.Hash ("position", bluePlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (BluePlayerI, iTween.Hash ("position", bluePlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -853,7 +871,7 @@ namespace Photon.Pun.UtilityScripts
 						BluePlayer_Steps [1] += 1;
 						playerTurn = "BLUE";
 						currentPlayerName = "BLUE PLAYER II";
-						iTween.MoveTo (BluePlayerII, iTween.Hash ("position", bluePlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (BluePlayerII, iTween.Hash ("position", bluePlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -936,8 +954,9 @@ namespace Photon.Pun.UtilityScripts
 						BluePlayer_Steps [2] += 1;
 						playerTurn = "BLUE";
 						currentPlayerName = "BLUE PLAYER III";
-						iTween.MoveTo (BluePlayerIII, iTween.Hash ("position", bluePlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (BluePlayerIII, iTween.Hash ("position", bluePlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
+
 					}
 				}
 			}
@@ -1019,7 +1038,7 @@ namespace Photon.Pun.UtilityScripts
 						BluePlayer_Steps [3] += 1;
 						playerTurn = "BLUE";
 						currentPlayerName = "BLUE PLAYER IV";
-						iTween.MoveTo (BluePlayerIV, iTween.Hash ("position", bluePlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (BluePlayerIV, iTween.Hash ("position", bluePlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -1107,7 +1126,7 @@ namespace Photon.Pun.UtilityScripts
 						GreenPlayer_Steps[0] += 1;
 						playerTurn = "GREEN";
 						currentPlayerName = "GREEN PLAYER I";
-						iTween.MoveTo (GreenPlayerI, iTween.Hash ("position", greenPlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (GreenPlayerI, iTween.Hash ("position", greenPlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -1193,7 +1212,7 @@ namespace Photon.Pun.UtilityScripts
 						GreenPlayer_Steps[1] += 1;
 						playerTurn = "GREEN";
 						currentPlayerName = "GREEN PLAYER II";
-						iTween.MoveTo (GreenPlayerII, iTween.Hash ("position", greenPlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (GreenPlayerII, iTween.Hash ("position", greenPlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -1280,7 +1299,7 @@ namespace Photon.Pun.UtilityScripts
 						GreenPlayer_Steps[2] += 1;
 						playerTurn = "GREEN";
 						currentPlayerName = "GREEN PLAYER III";
-						iTween.MoveTo (GreenPlayerIII, iTween.Hash ("position", greenPlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (GreenPlayerIII, iTween.Hash ("position", greenPlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -1366,7 +1385,7 @@ namespace Photon.Pun.UtilityScripts
 						GreenPlayer_Steps[3] += 1;
 						playerTurn = "GREEN";
 						currentPlayerName = "GREEN PLAYER IV";
-						iTween.MoveTo (GreenPlayerIV, iTween.Hash ("position", greenPlayer_Path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+						iTween.MoveTo (GreenPlayerIV, iTween.Hash ("position", greenPlayer_Path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 						PlayerCanPlayAgain = true;
 					}
 				}
@@ -1422,7 +1441,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerI_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1437,7 +1456,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1452,7 +1471,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerIII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1467,7 +1486,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerIV_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1483,7 +1502,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerI_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1498,7 +1517,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1513,7 +1532,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerIII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1528,7 +1547,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerIV_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2.5");
+				childNode.Add ("Wait", "2");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1538,16 +1557,17 @@ namespace Photon.Pun.UtilityScripts
 		{
 			if (path.Length > 1) 
 			{
-				iTween.MoveTo (Player, iTween.Hash ("path", path, "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+				iTween.MoveTo (Player, iTween.Hash ("path", path, "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 			} 
 			else
 			{
-				iTween.MoveTo (Player, iTween.Hash ("position", path [0], "speed", 125, "time", 2.0f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
+				iTween.MoveTo (Player, iTween.Hash ("position", path [0], "speed", 400, "time", 0.5f, "easetype", "elastic", "looptype", "none", "oncomplete", "InitializeDice", "oncompletetarget", this.gameObject));
 			}
 		}
-			
+
 		void Start () 
 		{
+			PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 1000 ;
 			GameObject OneOnOneConnectionManagerController = GameObject.Find ("SceneSWitchController");
 			this.turnManager = this.gameObject.AddComponent<PunTurnManager> ();
 			this.turnManager.TurnManagerListener = this;
@@ -1629,7 +1649,7 @@ namespace Photon.Pun.UtilityScripts
 		{}
 		public void OnPlayerFinished(Player player, int turn, object move)
 		{
-			
+
 			print ("OnPlayerFinished(Player player, int turn, object move) PlayerName:"+player.NickName);
 			temp = move as string;
 
@@ -1653,6 +1673,8 @@ namespace Photon.Pun.UtilityScripts
 				TimerImage.fillAmount = 1;
 				TimerImage.transform.position = TimerTwoPosition;
 				diceRoll.position = GreenDiceRollPosition.position;
+				playerTurn = "GREEN";
+				GreenFrame.SetActive (true);
 			} 
 			if (jn1 [0].Value.Equals ("Remote")) {
 				TriggeredTime = 0;
@@ -1661,6 +1683,8 @@ namespace Photon.Pun.UtilityScripts
 				TimerImage.fillAmount = 1;
 				TimerImage.transform.position = TimerOnePosition;
 				diceRoll.position = BlueDiceRollPosition.position;
+				playerTurn = "BLUE";
+				BlueFrame.SetActive (true);
 			}
 			string temp1 = temp;
 			temp = null;
@@ -1723,7 +1747,7 @@ namespace Photon.Pun.UtilityScripts
 
 			}
 		}
-			
+
 		IEnumerator WaitForSomeTime(string temp1)
 		{
 			print ("StartCoroutine (WaitForSomeTime ())");
@@ -1744,9 +1768,9 @@ namespace Photon.Pun.UtilityScripts
 			{
 				WaitingTime = .5f;
 			}
-			if (jn ["Wait"].Value.Equals ("2.5")) 
+			if (jn ["Wait"].Value.Equals ("2")) 
 			{
-				WaitingTime = 2.5f;
+				WaitingTime = 2f;
 			}
 			if (PlayerCanPlayAgain == true) 
 			{
@@ -1767,14 +1791,14 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public void OnTurnTimeEnds(int turn)
 		{
-			
+
 		}
 		#endregion
 		public void StartTurn()
 		{
 			print ("StartTurn000");
 
-			//		isMyTurn = true;
+			//	isMyTurn = true;
 
 			if (PhotonNetwork.IsMasterClient)
 			{
@@ -1797,6 +1821,7 @@ namespace Photon.Pun.UtilityScripts
 		{
 			Debug.Log("Other player arrived turn = "+ this.turnManager.Turn );
 			print ("PlayerCounter:" + PhotonNetwork.CountOfPlayersInRooms);
+			playerCounter += 1;
 			if (PhotonNetwork.PlayerList.Length == 2) {
 				ReconnectButton.SetActive (false);
 				DisconnectText.text=null;
@@ -1810,14 +1835,28 @@ namespace Photon.Pun.UtilityScripts
 
 		public void OnClickReconnectAndReJoin()
 		{
+			if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) 
+			{
+				print ("internet connection");
+				PhotonNetwork.ReconnectAndRejoin ();
+			}
+			else if(Application.internetReachability == NetworkReachability.NotReachable)
+			{
+				print ("no Internet connection is there");
+				StartCoroutine (NoInternetConnectionWarning ());
+			}
 			print ("Attempting to rejoin the room");
-			PhotonNetwork.ReconnectAndRejoin ();
 		}
-
+		IEnumerator NoInternetConnectionWarning()
+		{
+			DisconnectText.text = "PLEASE CONNECT TO INTERNET AND THEN CLICK THE BUTTON:";
+			yield return new WaitForSeconds (1);
+			DisconnectText.text ="DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
+		}
 		public override void OnLeftRoom ()
 		{
 			print ("Player left the room");
-//			base.OnLeftRoom ();
+			//	base.OnLeftRoom ();
 		}
 
 		public override void OnJoinedRoom ()
@@ -1825,12 +1864,27 @@ namespace Photon.Pun.UtilityScripts
 			DisconnectText.text = null;
 			ReconnectButton.SetActive (false);
 			DisconnectPanel.SetActive (false);
+			playerCounter += 1;
+			flag1 = false;
+			DisconnectecdTriggeredTime = 0;
+			DisconnectedTimer = 0;
+		}
+
+		void OnServerConnect()
+		{
+			print ("Connected");
+		}
+
+		void OnServerDisconnect()
+		{
+			print ("disconnected");
 		}
 
 		public override void OnPlayerLeftRoom (Photon.Realtime.Player otherPlayer)
 		{	
-//			base.OnPlayerLeftRoom (otherPlayer);
+			//	base.OnPlayerLeftRoom (otherPlayer);
 			print ("Player Disconnected");
+			playerCounter -= 1;
 			TriggeredTime = 0;
 			TriggerCounter = 0;
 			timer = 0;
@@ -1844,6 +1898,7 @@ namespace Photon.Pun.UtilityScripts
 		public override void OnDisconnected (DisconnectCause cause)
 		{
 			//Enable Reconnection Panel and Reset all the all the values of image and counters
+			playerCounter-=1;
 			TriggeredTime = 0;
 			TriggerCounter = 0;
 			timer = 0;
@@ -1851,20 +1906,22 @@ namespace Photon.Pun.UtilityScripts
 			DisconnectPanel.SetActive (true);
 			DisconnectText.text = "DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
 			ReconnectButton.SetActive (true);
-//			base.OnDisconnected (cause);
+			//	base.OnDisconnected (cause);
 		}
 
 		void Update()
-		{
-//			print ("Remaining time" + this.turnManager.RemainingSecondsInTurn+" TurnDuration:"+this.turnManager.TurnDuration+"Turn Value:"+this.turnManager.Turn);
+		{		
+			if (!turnManager.CancelGame) {
+				//	print ("Remaining time" + this.turnManager.RemainingSecondsInTurn+" TurnDuration:"+this.turnManager.TurnDuration+"Turn Value:"+this.turnManager.Turn);
+				if (!PhotonNetwork.InRoom) {
+					return;
+				}
+				SendBlankTurn ();
 
-			if (!PhotonNetwork.InRoom) 
-			{
-				return;
+				PassTurn ();
+			} else {
+				print ("Player connected to the room properly, Game Can't be Continue");
 			}
-			SendBlankTurn ();
-
-			PassTurn ();
 
 		}
 		void SendBlankTurn()
@@ -1884,18 +1941,18 @@ namespace Photon.Pun.UtilityScripts
 		}
 		void PassTurn()
 		{
-			if (isMyTurn && PhotonNetwork.PlayerList.Length == 2) {
+			if (isMyTurn && PhotonNetwork.CurrentRoom.PlayerCount == 2) {
 				if (TriggerCounter < 1) 
 				{
 					TriggerCounter += 1;
 					TriggeredTime = (int)Time.time;
 				}
-				if (TriggerCounter == 1 && timer!=21) 
+				if (TriggerCounter == 1 && timer!=31) 
 				{
-					TimerImage.fillAmount -= 1.0f / 20 * Time.deltaTime;
+					TimerImage.fillAmount -= 1.0f / 30 * Time.deltaTime;
 					timer = (int)Time.time - TriggeredTime;
 				}
-				if (TimerImage.fillAmount == 0 && timer==21) {
+				if (TimerImage.fillAmount == 0 && timer==31) {
 					print ("Sending Blank Turn");
 					string msg = null;
 					if (PhotonNetwork.IsMasterClient) {
