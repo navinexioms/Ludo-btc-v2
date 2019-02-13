@@ -1441,7 +1441,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerI_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1456,7 +1456,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1471,7 +1471,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerIII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1486,7 +1486,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "BluePlayerIV_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1502,7 +1502,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerI_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1517,7 +1517,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1532,7 +1532,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerIII_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1547,7 +1547,7 @@ namespace Photon.Pun.UtilityScripts
 
 				childNode.Add ("MethodName", "GreenPlayerIV_UI");
 				childNode.Add ("RandomNumber", selectDiceNumAnimation.ToString ());
-				childNode.Add ("Wait", "2");
+				childNode.Add ("Wait", "2.5");
 
 				temp = childNode.ToString ();
 				this.MakeTurn (temp);
@@ -1664,23 +1664,18 @@ namespace Photon.Pun.UtilityScripts
 			}
 
 			//=====================for BluePlayer====================
-
+			TriggeredTime = 0;
+			TriggerCounter = 0;
+			timer = 0;
+			TimerImage.fillAmount = 1;
 			JSONNode jn1 = SimpleJSON.JSONData.Parse (temp);
 			if (jn1 [0].Value.Equals ("Master")) {
-				TriggeredTime = 0;
-				TriggerCounter = 0;
-				timer = 0;
-				TimerImage.fillAmount = 1;
 				TimerImage.transform.position = TimerTwoPosition;
 				diceRoll.position = GreenDiceRollPosition.position;
 				playerTurn = "GREEN";
 				GreenFrame.SetActive (true);
 			} 
 			if (jn1 [0].Value.Equals ("Remote")) {
-				TriggeredTime = 0;
-				TriggerCounter = 0;
-				timer = 0;
-				TimerImage.fillAmount = 1;
 				TimerImage.transform.position = TimerOnePosition;
 				diceRoll.position = BlueDiceRollPosition.position;
 				playerTurn = "BLUE";
@@ -1768,9 +1763,9 @@ namespace Photon.Pun.UtilityScripts
 			{
 				WaitingTime = .5f;
 			}
-			if (jn ["Wait"].Value.Equals ("2")) 
+			if (jn ["Wait"].Value.Equals ("2.5")) 
 			{
-				WaitingTime = 2f;
+				WaitingTime = 2.5f;
 			}
 			if (PlayerCanPlayAgain == true) 
 			{
@@ -1823,6 +1818,9 @@ namespace Photon.Pun.UtilityScripts
 			print ("PlayerCounter:" + PhotonNetwork.CountOfPlayersInRooms);
 			playerCounter += 1;
 			if (PhotonNetwork.PlayerList.Length == 2) {
+				if (playerTurn.Equals ("BLUE") && PhotonNetwork.IsMasterClient) {
+					isMyTurn = true;
+				}
 				ReconnectButton.SetActive (false);
 				DisconnectText.text=null;
 				DisconnectPanel.SetActive (false);
@@ -1868,6 +1866,13 @@ namespace Photon.Pun.UtilityScripts
 			flag1 = false;
 			DisconnectecdTriggeredTime = 0;
 			DisconnectedTimer = 0;
+			if (PhotonNetwork.CurrentRoom.PlayerCount == 2) {
+				if (playerTurn.Equals ("GREEN") && !PhotonNetwork.IsMasterClient) {
+					isMyTurn=true;
+				} else if (playerTurn.Equals ("BLUE") && PhotonNetwork.IsMasterClient) {
+					isMyTurn = true;
+				}
+			}
 		}
 
 		void OnServerConnect()
@@ -1922,7 +1927,25 @@ namespace Photon.Pun.UtilityScripts
 			} else {
 				print ("Player connected to the room properly, Game Can't be Continue");
 			}
+			DisableAllButtons ();
+		}
+		void DisableAllButtons()
+		{
+			if (isMyTurn){
+				DiceRollButton.interactable = true;
+			}
+			if (!isMyTurn) {
+				DiceRollButton.interactable = false;
+				BluePlayerI_Button.enabled = false;
+				BluePlayerII_Button.enabled = false;
+				BluePlayerIII_Button.enabled = false;
+				BluePlayerIV_Button.enabled = false;
 
+				GreenPlayerI_Button.enabled = false;
+				GreenPlayerII_Button.enabled = false;
+				GreenPlayerIII_Button.enabled = false;
+				GreenPlayerIV_Button.enabled = false;
+			}
 		}
 		void SendBlankTurn()
 		{
@@ -1932,11 +1955,6 @@ namespace Photon.Pun.UtilityScripts
 				BlankTurn.Add ("None", "" + 0);
 				temp = BlankTurn.ToString ();
 				this.MakeTurn (temp);
-			}
-			if (isMyTurn == false) {
-				DiceRollButton.interactable = false;
-			} else {
-				DiceRollButton.interactable = true;
 			}
 		}
 		void PassTurn()

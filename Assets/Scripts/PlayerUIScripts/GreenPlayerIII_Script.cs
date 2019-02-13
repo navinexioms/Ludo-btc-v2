@@ -14,7 +14,7 @@ public class GreenPlayerIII_Script : MonoBehaviour {
 		{
 
 			GreenPlayerIII_ColName = col.gameObject.name;
-			print ("GreenPlayerIII_ColName:" + GreenPlayerIII_ColName);
+//			print ("GreenPlayerIII_ColName:" + GreenPlayerIII_ColName);
 			if (col.gameObject.name.Contains ("Safe House")) 
 			{
 

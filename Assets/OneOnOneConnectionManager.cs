@@ -26,8 +26,8 @@ namespace Photon.Pun.Demo.Cockpit
 				}
 //			int num = 0;
 //			num = Random.Range (2, 20000);
-				PhotonNetwork.AuthValues.UserId = "xyz";
-				PhotonNetwork.LocalPlayer.NickName = "xyz";
+				PhotonNetwork.AuthValues.UserId = "abc";
+				PhotonNetwork.LocalPlayer.NickName = "abc";
 				PhotonNetwork.ConnectUsingSettings ();
 			}
 		}
@@ -39,7 +39,7 @@ namespace Photon.Pun.Demo.Cockpit
 		public override void OnJoinedLobby()
 		{
 			print ("Joined lobby");
-			PhotonNetwork.CreateRoom ("nsd", new Photon.Realtime.RoomOptions{MaxPlayers=2,PlayerTtl=300000,EmptyRoomTtl=1000} , null);
+			PhotonNetwork.CreateRoom ("nsd", new Photon.Realtime.RoomOptions{MaxPlayers=2,PlayerTtl=300000,EmptyRoomTtl=10000} , null);
 		}
 		public override void OnCreatedRoom()
 		{

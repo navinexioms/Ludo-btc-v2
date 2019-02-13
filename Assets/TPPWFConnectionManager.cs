@@ -63,7 +63,7 @@ namespace Photon.Pun.Demo.Cockpit
 			PhotonNetwork.JoinOrCreateRoom (RoomName.text, new Photon.Realtime.RoomOptions {
 				MaxPlayers = 2,
 				PlayerTtl = 300000,
-				EmptyRoomTtl = 1000
+				EmptyRoomTtl = 10000
 			}, null);
 		}
 		public override void OnCreatedRoom()
