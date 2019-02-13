@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 using VoxelBusters;
 using VoxelBusters.NativePlugins;
 
-namespace Photon.Pun.Demo.Cockpit
+namespace Photon.Pun.UtilityScripts
 {
 	public class TPPWFConnectionManager : MonoBehaviourPunCallbacks {
 		public static bool isMaster,isRemote,JoinedRoomFlag;
 		public Text RoomName,WarningText;
+
 		void Awake()
 		{
 			DontDestroyOnLoad (this);
@@ -32,8 +33,8 @@ namespace Photon.Pun.Demo.Cockpit
 				{
 					PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
 				}
-				PhotonNetwork.AuthValues.UserId = "xyz";
-				PhotonNetwork.LocalPlayer.NickName = "xyz";
+				PhotonNetwork.AuthValues.UserId = "nsd";
+				PhotonNetwork.LocalPlayer.NickName = "nsd";
 				PhotonNetwork.ConnectUsingSettings ();
 			} else {
 				StartCoroutine (RoomNameWarning());

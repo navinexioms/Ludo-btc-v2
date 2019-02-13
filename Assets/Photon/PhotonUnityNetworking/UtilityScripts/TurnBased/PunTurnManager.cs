@@ -206,7 +206,7 @@ namespace Photon.Pun.UtilityScripts
 		void ProcessOnEvent(byte eventCode, object content, int senderId)
 		{
 			Player sender = PhotonNetwork.CurrentRoom.GetPlayer(senderId);
-			switch (eventCode)
+				switch (eventCode)
 			{
 			case EvMove:
 				{

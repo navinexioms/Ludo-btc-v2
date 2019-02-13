@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Photon.Pun.Demo.Cockpit
+namespace Photon.Pun.UtilityScripts
 {
 	public class OneOnOneConnectionManager : MonoBehaviourPunCallbacks
 	{
@@ -26,8 +26,8 @@ namespace Photon.Pun.Demo.Cockpit
 				}
 //			int num = 0;
 //			num = Random.Range (2, 20000);
-				PhotonNetwork.AuthValues.UserId = "abc";
-				PhotonNetwork.LocalPlayer.NickName = "abc";
+				PhotonNetwork.AuthValues.UserId = "aaa";
+				PhotonNetwork.LocalPlayer.NickName = "aaa";
 				PhotonNetwork.ConnectUsingSettings ();
 			}
 		}

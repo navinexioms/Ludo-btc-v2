@@ -18,10 +18,12 @@ namespace Photon.Pun.UtilityScripts
 		public int TriggerCounter;
 		public int timer;
 		public int playerCounter;
-		public int DisconnectecdTriggeredTime;
-		public int DisconnectedTimer;
 
-		public bool flag,flag1;
+		public int TriggeredTime2;
+		public int TriggerCounter2;
+		public int timer2;
+
+		public int ImageFillingCounter;
 
 		public GameObject DisconnectPanel;
 		public GameObject WinPanel, LosePanel;
@@ -33,7 +35,8 @@ namespace Photon.Pun.UtilityScripts
 
 		JSONNode rootNode=new JSONClass();
 		JSONNode childNode = new JSONClass ();
-		JSONNode BlankTurn = new JSONClass ();
+		JSONNode BlankTurn1 = new JSONClass ();
+		JSONNode BlankTurn2=new JSONClass();
 
 		public Image TimerImage;
 
@@ -773,7 +776,6 @@ namespace Photon.Pun.UtilityScripts
 					{
 						playerTurn = "GREEN";
 					}
-
 					currentPlayerName = "BLUE PLAYER I";
 					MovingBlueOrGreenPlayer (BluePlayerI, bluePlayer_Path);
 				} 
@@ -1615,6 +1617,7 @@ namespace Photon.Pun.UtilityScripts
 
 			if (PhotonNetwork.PlayerList.Length == 2) {
 				EnableFrameAndBorderForFirstTime ();
+				ImageFillingCounter = 1;
 			} else if (PhotonNetwork.PlayerList.Length == 1) {
 				DisconnectPanel.SetActive (true);
 				ReconnectButton.SetActive(false);
@@ -1638,8 +1641,8 @@ namespace Photon.Pun.UtilityScripts
 			{
 				print ("Sending Blank Turn" + " isMyTurn" + isMyTurn);
 				ActualPlayerCanPlayAgain = false;
-				BlankTurn.Add ("None", ""+0);
-				temp = BlankTurn.ToString ();
+				BlankTurn1.Add ("None", ""+0);
+				temp = BlankTurn1.ToString ();
 				this.MakeTurn (temp);
 			}
 		}
@@ -1669,17 +1672,35 @@ namespace Photon.Pun.UtilityScripts
 			timer = 0;
 			TimerImage.fillAmount = 1;
 			JSONNode jn1 = SimpleJSON.JSONData.Parse (temp);
-			if (jn1 [0].Value.Equals ("Master")) {
+			if (jn1 [0].Value.Equals ("Master") ) {
 				TimerImage.transform.position = TimerTwoPosition;
 				diceRoll.position = GreenDiceRollPosition.position;
+				DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [6];
 				playerTurn = "GREEN";
 				GreenFrame.SetActive (true);
+				BlueFrame.SetActive (false);
+				DisablingBordersOFBluePlayer ();
+				if (!PhotonNetwork.IsMasterClient) {
+					DiceRollButton.enabled = true;
+					DiceRollButton.interactable = true;
+				} else {
+					DiceRollButton.interactable = false;
+				}
 			} 
-			if (jn1 [0].Value.Equals ("Remote")) {
+			if (jn1 [0].Value.Equals ("Remote") ) {
 				TimerImage.transform.position = TimerOnePosition;
 				diceRoll.position = BlueDiceRollPosition.position;
+				DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [6];
 				playerTurn = "BLUE";
 				BlueFrame.SetActive (true);
+				GreenFrame.SetActive (false);
+				DisablingBordersOFGreenPlayer ();
+				if (PhotonNetwork.IsMasterClient) {
+					DiceRollButton.enabled = true;
+					DiceRollButton.interactable = true;
+				} else {
+					DiceRollButton.interactable = false;
+				}
 			}
 			string temp1 = temp;
 			temp = null;
@@ -1818,6 +1839,7 @@ namespace Photon.Pun.UtilityScripts
 			print ("PlayerCounter:" + PhotonNetwork.CountOfPlayersInRooms);
 			playerCounter += 1;
 			if (PhotonNetwork.PlayerList.Length == 2) {
+				ImageFillingCounter = 1;
 				if (playerTurn.Equals ("BLUE") && PhotonNetwork.IsMasterClient) {
 					isMyTurn = true;
 				}
@@ -1863,9 +1885,6 @@ namespace Photon.Pun.UtilityScripts
 			ReconnectButton.SetActive (false);
 			DisconnectPanel.SetActive (false);
 			playerCounter += 1;
-			flag1 = false;
-			DisconnectecdTriggeredTime = 0;
-			DisconnectedTimer = 0;
 			if (PhotonNetwork.CurrentRoom.PlayerCount == 2) {
 				if (playerTurn.Equals ("GREEN") && !PhotonNetwork.IsMasterClient) {
 					isMyTurn=true;
@@ -1921,9 +1940,11 @@ namespace Photon.Pun.UtilityScripts
 				if (!PhotonNetwork.InRoom) {
 					return;
 				}
+
 				SendBlankTurn ();
 
-				PassTurn ();
+				TimerLogicWhenIsMyTurn ();
+
 			} else {
 				print ("Player connected to the room properly, Game Can't be Continue");
 			}
@@ -1932,6 +1953,9 @@ namespace Photon.Pun.UtilityScripts
 		void DisableAllButtons()
 		{
 			if (isMyTurn){
+				TriggerCounter2 = 0;
+				TriggeredTime2 = 0;
+				timer2 = 0;
 				DiceRollButton.interactable = true;
 			}
 			if (!isMyTurn) {
@@ -1952,35 +1976,59 @@ namespace Photon.Pun.UtilityScripts
 			if (ActualPlayerCanPlayAgain == true && isMyTurn == true && !PhotonNetwork.IsMasterClient) {
 				print ("Sending Blank Turn" + " isMyTurn" + isMyTurn);
 				ActualPlayerCanPlayAgain = false;
-				BlankTurn.Add ("None", "" + 0);
-				temp = BlankTurn.ToString ();
+				BlankTurn1.Add ("None", "" + 0);
+				temp = BlankTurn1.ToString ();
 				this.MakeTurn (temp);
 			}
 		}
-		void PassTurn()
+		void TimerLogicWhenIsMyTurn()
 		{
 			if (isMyTurn && PhotonNetwork.CurrentRoom.PlayerCount == 2) {
 				if (TriggerCounter < 1) 
 				{
 					TriggerCounter += 1;
 					TriggeredTime = (int)Time.time;
+					TimerImage.fillAmount = 1;
 				}
 				if (TriggerCounter == 1 && timer!=31) 
 				{
 					TimerImage.fillAmount -= 1.0f / 30 * Time.deltaTime;
 					timer = (int)Time.time - TriggeredTime;
 				}
-				if (TimerImage.fillAmount == 0 && timer==31) {
-					print ("Sending Blank Turn");
+				if (TimerImage.fillAmount == 0 || timer==31) {
+					print ("Filling Image");
 					string msg = null;
 					if (PhotonNetwork.IsMasterClient) {
 						msg = "Master";
 					} else {
 						msg = "Remote";
 					}
-					BlankTurn.Add ("None1", msg);
-					temp = BlankTurn.ToString ();
+					BlankTurn2.Add ("None1", msg);
+					temp = BlankTurn2.ToString ();
 					this.MakeTurn (temp);
+				}
+			}
+			else if (!isMyTurn  && PhotonNetwork.CurrentRoom.PlayerCount == 2) {
+				if (TriggerCounter2 < 1 && ImageFillingCounter == 1) {
+					ImageFillingCounter = 2;
+					TriggerCounter2 += 1;
+					TriggeredTime2 = (int)Time.time;
+				}
+				if (TriggerCounter2 == 1 && timer2 != 31) {
+					TimerImage.fillAmount -= 1.0f / 30 * Time.deltaTime;
+					timer2 = (int)Time.time - TriggeredTime2;
+				}
+			}
+			if (!isMyTurn && PhotonNetwork.CurrentRoom.PlayerCount == 2) {
+				if (TriggerCounter2 < 1) {
+					TriggerCounter2 += 1;
+					TriggeredTime2 = (int)Time.time;
+					TriggeredTime2 += 2;
+				}
+				if (timer2 != 3) {
+					timer2 = (int)(Time.time - TriggeredTime2);
+				} else if (TimerImage.fillAmount != 0) {
+					TimerImage.fillAmount -= 1.0f / 30 * Time.deltaTime;
 				}
 			}
 		}
