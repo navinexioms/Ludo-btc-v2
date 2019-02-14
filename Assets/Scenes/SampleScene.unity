@@ -937,12 +937,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a518ee6fd4cad3e4796ac7c2e00adaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TurnStatusText: {fileID: 0}
-  isMyTurn: 0
-  DiceRollButton: {fileID: 486179718}
-  Player1Button: {fileID: 1911737504}
-  Player2Button: {fileID: 434021616}
-  selectDiceNumAnimation: 0
+  TriggeredTime: 0
+  TriggerCounter: 0
+  timer: 0
+  playerCounter: 0
+  TriggeredTime2: 0
+  TriggerCounter2: 0
+  timer2: 0
+  ImageFillingCounter: 0
+  DisconnectPanel: {fileID: 0}
+  WinPanel: {fileID: 0}
+  LosePanel: {fileID: 0}
+  DisconnectText: {fileID: 0}
+  DisconnectText1: {fileID: 0}
+  ReconnectButton: {fileID: 0}
+  TimerImage: {fileID: 1543211691}
+  ImageOne: {fileID: 0}
+  ImageTwo: {fileID: 0}
+  TimerOnePosition: {x: 0, y: 0, z: 0}
+  TimerTwoPosition: {x: 0, y: 0, z: 0}
+  GameOver: {fileID: 0}
+  GameOverText: {fileID: 0}
+  BlueFrame: {fileID: 0}
+  GreenFrame: {fileID: 0}
+  BluePlayerI_Border: {fileID: 0}
+  BluePlayerII_Border: {fileID: 0}
+  BluePlayerIII_Border: {fileID: 0}
+  BluePlayerIV_Border: {fileID: 0}
+  GreenPlayerI_Border: {fileID: 0}
+  GreenPlayerII_Border: {fileID: 0}
+  GreenPlayerIII_Border: {fileID: 0}
+  GreenPlayerIV_Border: {fileID: 0}
   DiceSprite:
   - {fileID: 21300002, guid: 77e4cb056839bb843aa5bbe38ed77a6e, type: 3}
   - {fileID: 21300008, guid: 77e4cb056839bb843aa5bbe38ed77a6e, type: 3}
@@ -951,10 +976,44 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 77e4cb056839bb843aa5bbe38ed77a6e, type: 3}
   - {fileID: 21300010, guid: 77e4cb056839bb843aa5bbe38ed77a6e, type: 3}
   - {fileID: 21300000, guid: 95b19d137f978481b87403c052139f15, type: 3}
-  TimerImage: {fileID: 1543211691}
-  Player1Location: {fileID: 2082552995}
-  Player2Location: {fileID: 1798125534}
-  counter: 0
+  BluePlayers_Pos: []
+  GreenPlayers_Pos: []
+  BluePlayerI_Button: {fileID: 0}
+  BluePlayerII_Button: {fileID: 0}
+  BluePlayerIII_Button: {fileID: 0}
+  BluePlayerIV_Button: {fileID: 0}
+  GreenPlayerI_Button: {fileID: 0}
+  GreenPlayerII_Button: {fileID: 0}
+  GreenPlayerIII_Button: {fileID: 0}
+  GreenPlayerIV_Button: {fileID: 0}
+  BlueScreen: {fileID: 0}
+  GreenScreen: {fileID: 0}
+  BlueRankText: {fileID: 0}
+  GreenRankText: {fileID: 0}
+  playerTurn: BLUE
+  diceRoll: {fileID: 0}
+  DiceRollButton: {fileID: 486179718}
+  BlueDiceRollPosition: {fileID: 0}
+  GreenDiceRollPosition: {fileID: 0}
+  BluePlayerI: {fileID: 0}
+  BluePlayerII: {fileID: 0}
+  BluePlayerIII: {fileID: 0}
+  BluePlayerIV: {fileID: 0}
+  GreenPlayerI: {fileID: 0}
+  GreenPlayerII: {fileID: 0}
+  GreenPlayerIII: {fileID: 0}
+  GreenPlayerIV: {fileID: 0}
+  BluePlayer_Steps: 
+  GreenPlayer_Steps: 
+  blueMovemenBlock: []
+  greenMovementBlock: []
+  BluePlayers: []
+  GreenPlayers: []
+  confirmScreen: {fileID: 0}
+  gameCompletedScreen: {fileID: 0}
+  isMyTurn: 0
+  PlayerCanPlayAgain: 0
+  ActualPlayerCanPlayAgain: 0
   temp: 
 --- !u!114 &1986803684
 MonoBehaviour:
@@ -1090,7 +1149,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

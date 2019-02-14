@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using RestSharp;
+using UnityEngine.Networking;
 
+namespace RestSharp.Extensions
+{
 public class SceneController : MonoBehaviour
 {
 	public GameObject SplashScreen;
 	public GameObject LoginPanel;
 	public GameObject Blackscreen;
 	public GameObject AvatarScreen;
-
+	public Text Username1;
+	public Text Password1;
+//	public url a;
 	public string Username=null, Password=null;
 
 	private bool netConnectivity;
@@ -33,6 +40,7 @@ public class SceneController : MonoBehaviour
 		{
 			print ("no Internet connection is there");
 		}
+			print(Username1.text+""+Password1.text);
 	}
 
 	IEnumerator LoadPanel(GameObject panelToDisable,GameObject PanelToEnable,float time,string message)
@@ -91,11 +99,27 @@ public class SceneController : MonoBehaviour
 		}
 		else if (Username.Length > 0 && Password.Length > 0 && (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)) 
 		{
-			StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 0,"a"));
+				
+				WWW request =new WWW("http://apienjoybtc.exioms.me/api/Home/log?my_sponsar_id="+Username+"&password="+Password);
+				StartCoroutine (HitUrl (request));
+//				var client = new RestClient("http://apienjoybtc.exioms.me/api/Home/log?my_sponsar_id=ENB20191&password=ebtc@admin");
+//				var request = new RestRequest(Method.GET);
+//				request.AddHeader("Postman-Token", "6b802c90-e2ce-4cc5-a9f7-5668d0cadfec");
+//				request.AddHeader("cache-control", "no-cache");
+//				request.AddHeader("Content-Type", "application/json");
+//				request.AddHeader("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
+//				request.AddParameter("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW", "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name="my_sponsar_id"\r\n\r\nITG20172\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name="password"\r\n\r\n123456\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--", ParameterType.RequestBody);
+//				IRestResponse response = client.Execute(request);
+//			StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 0,"a"));
+
 		}
 
 	}
-
+		IEnumerator HitUrl(WWW abc)
+		{
+			yield return abc;
+			print (abc.text);
+		}
 	public void TakeuserName(string uname) 
 	{
 		Username = uname.ToString ();
@@ -117,4 +141,5 @@ public class SceneController : MonoBehaviour
 		
 		SceneManager.LoadScene ("PlayerVSAI");
 	}
+}
 }
