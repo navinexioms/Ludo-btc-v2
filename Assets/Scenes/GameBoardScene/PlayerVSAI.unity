@@ -588,6 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 43149933}
   - component: {fileID: 43149934}
+  - component: {fileID: 43149935}
   m_Layer: 5
   m_Name: Blue (51)
   m_TagString: blocks
@@ -638,6 +639,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &43149935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43149932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &64928050
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +1004,176 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!1 &129279847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 129279848}
+  - component: {fileID: 129279852}
+  - component: {fileID: 129279851}
+  - component: {fileID: 129279850}
+  - component: {fileID: 129279849}
+  m_Layer: 5
+  m_Name: BlueCircle I
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &129279848
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 129279847}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.277736, y: 1.2777365, z: 1.2777365}
+  m_Children: []
+  m_Father: {fileID: 1816474007}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0, y: 0.000030517578}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &129279849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 129279847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 129279851}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BluePlayerI_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &129279850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 129279847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: 
+  playAutomatically: 1
+  delay: 0
+  type: 23
+  showIconInInspector: 1
+  keys:
+  - z
+  - time
+  - speed
+  - looptype
+  - easetype
+  indexes: 0000000001000000020000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 20
+  - 0.5
+  - 120
+  bools: 
+  strings: []
+  vector3s: []
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 01000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &129279851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 129279847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19215688, g: 0.40000004, b: 0.89019614, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 55e97eca6ad8e4847ad196293eb42dc4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &129279852
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 129279847}
 --- !u!1 &166792346
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,6 +1183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166792347}
   - component: {fileID: 166792348}
+  - component: {fileID: 166792349}
   m_Layer: 5
   m_Name: Yellow (53)
   m_TagString: blocks
@@ -1043,6 +1234,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &166792349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 166792346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &222905000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,6 +1262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 222905001}
   - component: {fileID: 222905002}
+  - component: {fileID: 222905003}
   m_Layer: 5
   m_Name: Red (53)
   m_TagString: blocks
@@ -1102,6 +1313,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &222905003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 222905000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &229282193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,6 +1341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 229282194}
   - component: {fileID: 229282195}
+  - component: {fileID: 229282196}
   m_Layer: 5
   m_Name: Yellow (51)
   m_TagString: blocks
@@ -1161,6 +1392,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &229282196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229282193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &237130069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 237130070}
   - component: {fileID: 237130071}
+  - component: {fileID: 237130072}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -1220,6 +1471,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &237130072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237130069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &281765610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 281765611}
   - component: {fileID: 281765612}
+  - component: {fileID: 281765613}
   m_Layer: 5
   m_Name: Green (53)
   m_TagString: blocks
@@ -1279,6 +1550,365 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &281765613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 281765610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
+--- !u!1 &284005566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 284005567}
+  - component: {fileID: 284005571}
+  - component: {fileID: 284005570}
+  - component: {fileID: 284005569}
+  - component: {fileID: 284005568}
+  m_Layer: 5
+  m_Name: BlueCircle I
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &284005567
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284005566}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.277736, y: 1.2777365, z: 1.2777365}
+  m_Children: []
+  m_Father: {fileID: 1432473269}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0, y: 0.000030517578}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &284005568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284005566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 284005570}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BluePlayerI_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &284005569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284005566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: 
+  playAutomatically: 1
+  delay: 0
+  type: 23
+  showIconInInspector: 1
+  keys:
+  - z
+  - time
+  - speed
+  - looptype
+  - easetype
+  indexes: 0000000001000000020000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 20
+  - 0.5
+  - 120
+  bools: 
+  strings: []
+  vector3s: []
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 01000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &284005570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284005566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19215688, g: 0.40000004, b: 0.89019614, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 55e97eca6ad8e4847ad196293eb42dc4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &284005571
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284005566}
+--- !u!1 &292354902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 292354903}
+  - component: {fileID: 292354907}
+  - component: {fileID: 292354906}
+  - component: {fileID: 292354905}
+  - component: {fileID: 292354904}
+  m_Layer: 5
+  m_Name: BlueCircle II
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &292354903
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 292354902}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.277736, y: 1.2777365, z: 1.2777365}
+  m_Children: []
+  m_Father: {fileID: 428227937}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0, y: 0.000030517578}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &292354904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 292354902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 292354906}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BlueplayerII_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &292354905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 292354902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: 
+  playAutomatically: 1
+  delay: 0
+  type: 23
+  showIconInInspector: 1
+  keys:
+  - z
+  - time
+  - speed
+  - looptype
+  - easetype
+  indexes: 0000000001000000020000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 20
+  - 0.5
+  - 120
+  bools: 
+  strings: []
+  vector3s: []
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 01000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &292354906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 292354902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19215688, g: 0.40000004, b: 0.89019614, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 55e97eca6ad8e4847ad196293eb42dc4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &292354907
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 292354902}
 --- !u!1 &320401422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,6 +1918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 320401423}
   - component: {fileID: 320401424}
+  - component: {fileID: 320401425}
   m_Layer: 5
   m_Name: Red (55)
   m_TagString: blocks
@@ -1338,6 +1969,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &320401425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 320401422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &339259962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +2344,236 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 415455656}
+--- !u!1 &428227936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 428227937}
+  - component: {fileID: 428227944}
+  - component: {fileID: 428227943}
+  - component: {fileID: 428227942}
+  - component: {fileID: 428227941}
+  - component: {fileID: 428227940}
+  - component: {fileID: 428227939}
+  - component: {fileID: 428227938}
+  m_Layer: 5
+  m_Name: Blue Player II (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &428227937
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.46929196, y: 0.46929184, z: 0.46929184}
+  m_Children:
+  - {fileID: 292354903}
+  m_Father: {fileID: 1615452839}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -33.307, y: -304.03}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &428227938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: blueII
+  playAutomatically: 0
+  delay: 0
+  type: 28
+  showIconInInspector: 0
+  keys:
+  - amount
+  - time
+  - speed
+  - easetype
+  - looptype
+  indexes: 0000000000000000010000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 1
+  - 1
+  bools: 
+  strings: []
+  vector3s:
+  - {x: 1.1, y: 1.1, z: 1.1}
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 02000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &428227939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0621e94ecd679e4da45fde268ca9ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &428227940
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &428227941
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 30, y: 30}
+  m_EdgeRadius: 0
+--- !u!114 &428227942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 428227943}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BlueplayerII_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &428227943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 90bb9514f2377004e8004f02faadc265, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &428227944
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428227936}
 --- !u!1 &433491456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,6 +2692,176 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!1 &444973315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 444973316}
+  - component: {fileID: 444973320}
+  - component: {fileID: 444973319}
+  - component: {fileID: 444973318}
+  - component: {fileID: 444973317}
+  m_Layer: 5
+  m_Name: BlueCircle II
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &444973316
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 444973315}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.277736, y: 1.2777365, z: 1.2777365}
+  m_Children: []
+  m_Father: {fileID: 843092495}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0, y: 0.000030517578}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &444973317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 444973315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 444973319}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BlueplayerII_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &444973318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 444973315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: 
+  playAutomatically: 1
+  delay: 0
+  type: 23
+  showIconInInspector: 1
+  keys:
+  - z
+  - time
+  - speed
+  - looptype
+  - easetype
+  indexes: 0000000001000000020000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 20
+  - 0.5
+  - 120
+  bools: 
+  strings: []
+  vector3s: []
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 01000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &444973319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 444973315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19215688, g: 0.40000004, b: 0.89019614, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 55e97eca6ad8e4847ad196293eb42dc4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &444973320
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 444973315}
 --- !u!1 &460821371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,6 +3021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 529359089}
   - component: {fileID: 529359090}
+  - component: {fileID: 529359091}
   m_Layer: 5
   m_Name: Blue (53)
   m_TagString: blocks
@@ -2021,6 +3072,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &529359091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 529359088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &536640043
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,6 +3331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 623197611}
   - component: {fileID: 623197612}
+  - component: {fileID: 623197613}
   m_Layer: 5
   m_Name: Yellow (52)
   m_TagString: blocks
@@ -2311,6 +3382,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &623197613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 623197610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &633662147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,6 +3528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 666437401}
   - component: {fileID: 666437402}
+  - component: {fileID: 666437403}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -2488,6 +3579,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &666437403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666437400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &669974040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,6 +3957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719088505}
   - component: {fileID: 719088506}
+  - component: {fileID: 719088507}
   m_Layer: 5
   m_Name: Yellow (54)
   m_TagString: blocks
@@ -2897,6 +4008,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &719088507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 719088504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &722733803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,6 +4206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731737533}
   - component: {fileID: 731737534}
+  - component: {fileID: 731737535}
   m_Layer: 5
   m_Name: Blue (55)
   m_TagString: blocks
@@ -3126,6 +4257,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &731737535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 731737532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &743042015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,6 +4285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 743042016}
   - component: {fileID: 743042017}
+  - component: {fileID: 743042018}
   m_Layer: 5
   m_Name: Red (52)
   m_TagString: blocks
@@ -3185,6 +4336,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &743042018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 743042015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &764878862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,6 +4364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 764878863}
   - component: {fileID: 764878864}
+  - component: {fileID: 764878865}
   m_Layer: 5
   m_Name: Red (54)
   m_TagString: blocks
@@ -3244,6 +4415,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &764878865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 764878862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &788004085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3569,6 +4759,236 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!1 &843092494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 843092495}
+  - component: {fileID: 843092502}
+  - component: {fileID: 843092501}
+  - component: {fileID: 843092500}
+  - component: {fileID: 843092499}
+  - component: {fileID: 843092498}
+  - component: {fileID: 843092497}
+  - component: {fileID: 843092496}
+  m_Layer: 5
+  m_Name: Blue Player II (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &843092495
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.46929196, y: 0.46929184, z: 0.46929184}
+  m_Children:
+  - {fileID: 444973316}
+  m_Father: {fileID: 1615452839}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -33.307, y: -304.03}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &843092496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: blueII
+  playAutomatically: 0
+  delay: 0
+  type: 28
+  showIconInInspector: 0
+  keys:
+  - amount
+  - time
+  - speed
+  - easetype
+  - looptype
+  indexes: 0000000000000000010000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 1
+  - 1
+  bools: 
+  strings: []
+  vector3s:
+  - {x: 1.1, y: 1.1, z: 1.1}
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 02000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &843092497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0621e94ecd679e4da45fde268ca9ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &843092498
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &843092499
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 30, y: 30}
+  m_EdgeRadius: 0
+--- !u!114 &843092500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 843092501}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BlueplayerII_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &843092501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 90bb9514f2377004e8004f02faadc265, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &843092502
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843092494}
 --- !u!1 &855591616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,6 +5168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 871522718}
   - component: {fileID: 871522719}
+  - component: {fileID: 871522720}
   m_Layer: 5
   m_Name: Green (51)
   m_TagString: blocks
@@ -3798,6 +5219,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &871522720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871522717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &889787805
 GameObject:
   m_ObjectHideFlags: 0
@@ -4155,6 +5595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 905437212}
   - component: {fileID: 905437213}
+  - component: {fileID: 905437214}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -4205,6 +5646,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &905437214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905437211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &910045571
 GameObject:
   m_ObjectHideFlags: 0
@@ -4924,7 +6384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1058033182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5129,6 +6589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1109528346}
   - component: {fileID: 1109528347}
+  - component: {fileID: 1109528348}
   m_Layer: 5
   m_Name: Blue (52)
   m_TagString: blocks
@@ -5179,6 +6640,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1109528348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1109528345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1118780370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5423,6 +6903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1155837176}
   - component: {fileID: 1155837177}
+  - component: {fileID: 1155837178}
   m_Layer: 5
   m_Name: Safe House Green
   m_TagString: blocks
@@ -5473,6 +6954,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1155837178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1155837175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1164113229
 GameObject:
   m_ObjectHideFlags: 0
@@ -5652,6 +7152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1165028654}
   - component: {fileID: 1165028655}
+  - component: {fileID: 1165028656}
   m_Layer: 5
   m_Name: Green (55)
   m_TagString: blocks
@@ -5702,6 +7203,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1165028656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1165028653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1001 &1183014272
 Prefab:
   m_ObjectHideFlags: 0
@@ -5983,6 +7503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223261188}
   - component: {fileID: 1223261189}
+  - component: {fileID: 1223261190}
   m_Layer: 5
   m_Name: Blue (54)
   m_TagString: blocks
@@ -6033,6 +7554,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1223261190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1223261187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1228161092
 GameObject:
   m_ObjectHideFlags: 0
@@ -6042,6 +7582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1228161093}
   - component: {fileID: 1228161094}
+  - component: {fileID: 1228161095}
   m_Layer: 5
   m_Name: Green (54)
   m_TagString: blocks
@@ -6092,6 +7633,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1228161095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1228161092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1230709710
 GameObject:
   m_ObjectHideFlags: 0
@@ -6101,6 +7661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1230709711}
   - component: {fileID: 1230709712}
+  - component: {fileID: 1230709713}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -6151,6 +7712,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1230709713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1230709710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1236410720
 GameObject:
   m_ObjectHideFlags: 0
@@ -7195,6 +8775,236 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!1 &1432473268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1432473269}
+  - component: {fileID: 1432473276}
+  - component: {fileID: 1432473275}
+  - component: {fileID: 1432473274}
+  - component: {fileID: 1432473273}
+  - component: {fileID: 1432473272}
+  - component: {fileID: 1432473271}
+  - component: {fileID: 1432473270}
+  m_Layer: 5
+  m_Name: Blue Player I (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1432473269
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.46929196, y: 0.46929184, z: 0.46929184}
+  m_Children:
+  - {fileID: 284005567}
+  m_Father: {fileID: 1615452839}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -69.2, y: -303.77}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1432473270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: blueI
+  playAutomatically: 0
+  delay: 0
+  type: 28
+  showIconInInspector: 0
+  keys:
+  - amount
+  - time
+  - speed
+  - easetype
+  - looptype
+  indexes: 0000000000000000010000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 1
+  - 1
+  bools: 
+  strings: []
+  vector3s:
+  - {x: 1.1, y: 1.1, z: 1.1}
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 02000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &1432473271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b053ce81b5e504197c620bb21b2218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &1432473272
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &1432473273
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 30, y: 30}
+  m_EdgeRadius: 0
+--- !u!114 &1432473274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1432473275}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BluePlayerI_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1432473275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 90bb9514f2377004e8004f02faadc265, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1432473276
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432473268}
 --- !u!1 &1454007496
 GameObject:
   m_ObjectHideFlags: 0
@@ -7411,6 +9221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1487872456}
   - component: {fileID: 1487872457}
+  - component: {fileID: 1487872458}
   m_Layer: 5
   m_Name: Safe house Red
   m_TagString: blocks
@@ -7461,6 +9272,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1487872458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487872455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1584546119
 GameObject:
   m_ObjectHideFlags: 0
@@ -7529,6 +9359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1606314199}
   - component: {fileID: 1606314200}
+  - component: {fileID: 1606314201}
   m_Layer: 5
   m_Name: Safe House Yellow
   m_TagString: blocks
@@ -7579,6 +9410,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1606314201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1606314198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1615452835
 GameObject:
   m_ObjectHideFlags: 0
@@ -7679,6 +9529,10 @@ RectTransform:
   - {fileID: 1337348674}
   - {fileID: 1058033182}
   - {fileID: 2123076205}
+  - {fileID: 1432473269}
+  - {fileID: 843092495}
+  - {fileID: 1816474007}
+  - {fileID: 428227937}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8274,6 +10128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1669211761}
   - component: {fileID: 1669211762}
+  - component: {fileID: 1669211763}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -8324,6 +10179,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1669211763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669211760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1693003049
 GameObject:
   m_ObjectHideFlags: 0
@@ -8392,6 +10266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1812348567}
   - component: {fileID: 1812348568}
+  - component: {fileID: 1812348569}
   m_Layer: 5
   m_Name: Safe House Blue
   m_TagString: blocks
@@ -8442,6 +10317,255 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1812348569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1812348566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
+--- !u!1 &1816474006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1816474007}
+  - component: {fileID: 1816474014}
+  - component: {fileID: 1816474013}
+  - component: {fileID: 1816474012}
+  - component: {fileID: 1816474011}
+  - component: {fileID: 1816474010}
+  - component: {fileID: 1816474009}
+  - component: {fileID: 1816474008}
+  m_Layer: 5
+  m_Name: Blue Player I (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1816474007
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.46929196, y: 0.46929184, z: 0.46929184}
+  m_Children:
+  - {fileID: 129279848}
+  m_Father: {fileID: 1615452839}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -66.793, y: -303.77}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1816474008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe1355469f9d4a8d8399e46358cccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: blueI
+  playAutomatically: 0
+  delay: 0
+  type: 28
+  showIconInInspector: 0
+  keys:
+  - amount
+  - time
+  - speed
+  - easetype
+  - looptype
+  indexes: 0000000000000000010000000000000000000000
+  metadatas:
+  - 
+  - 
+  - 
+  - 
+  - 
+  ints: 
+  floats:
+  - 1
+  - 1
+  bools: 
+  strings: []
+  vector3s:
+  - {x: 1.1, y: 1.1, z: 1.1}
+  colors: []
+  spaces: 
+  easeTypes: 15000000
+  loopTypes: 02000000
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
+--- !u!114 &1816474009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b053ce81b5e504197c620bb21b2218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &1816474010
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &1816474011
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 30, y: 30}
+  m_EdgeRadius: 0
+--- !u!114 &1816474012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1816474013}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1925862080}
+        m_MethodName: BluePlayerI_UI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1816474013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 90bb9514f2377004e8004f02faadc265, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1816474014
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816474006}
 --- !u!1 &1839903968
 GameObject:
   m_ObjectHideFlags: 0
@@ -8871,6 +10995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885020033}
   - component: {fileID: 1885020034}
+  - component: {fileID: 1885020035}
   m_Layer: 5
   m_Name: Yellow (55)
   m_TagString: blocks
@@ -8921,6 +11046,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1885020035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885020032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1898574608
 GameObject:
   m_ObjectHideFlags: 0
@@ -8930,6 +11074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1898574609}
   - component: {fileID: 1898574610}
+  - component: {fileID: 1898574611}
   m_Layer: 5
   m_Name: Green (52)
   m_TagString: blocks
@@ -8980,6 +11125,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1898574611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898574608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1913023991
 GameObject:
   m_ObjectHideFlags: 0
@@ -9289,6 +11453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1944043462}
   - component: {fileID: 1944043463}
+  - component: {fileID: 1944043464}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -9339,6 +11504,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1944043464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1944043461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1953417592
 GameObject:
   m_ObjectHideFlags: 0
@@ -9348,6 +11532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1953417593}
   - component: {fileID: 1953417594}
+  - component: {fileID: 1953417595}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -9398,6 +11583,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &1953417595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1953417592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &1958491427
 GameObject:
   m_ObjectHideFlags: 0
@@ -9814,6 +12018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2002602691}
   - component: {fileID: 2002602692}
+  - component: {fileID: 2002602693}
   m_Layer: 5
   m_Name: Star
   m_TagString: blocks
@@ -9864,6 +12069,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &2002602693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2002602690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &2018475673
 GameObject:
   m_ObjectHideFlags: 0
@@ -9941,6 +12165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2022045401}
   - component: {fileID: 2022045402}
+  - component: {fileID: 2022045403}
   m_Layer: 5
   m_Name: Red (51)
   m_TagString: blocks
@@ -9991,6 +12216,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 50}
   m_EdgeRadius: 0
+--- !u!114 &2022045403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2022045400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b33863c39c5334fb36fda5255de0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeForTwoPices: {fileID: 1432473268}
+  SizeForThreePices: {fileID: 0}
+  SizeForFourPices: {fileID: 0}
+  SizeForFivePices: {fileID: 0}
+  SizeForSixPices: {fileID: 0}
+  ActualSize: {fileID: 1988182036}
+  PicesContains: []
+  Number: 0
 --- !u!1 &2061524684
 GameObject:
   m_ObjectHideFlags: 0

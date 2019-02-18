@@ -7,7 +7,7 @@ namespace Photon.Pun.UtilityScripts
 {
 	public class OneOnOneConnectionManager : MonoBehaviourPunCallbacks
 	{
-		public static bool isMaster,isRemote;
+		public static bool isMaster,isRemote,JoinedRoomFlag;
 		void Awake()
 		{
 			DontDestroyOnLoad (this);
@@ -20,16 +20,15 @@ namespace Photon.Pun.UtilityScripts
 	// Use this for initialization
 		public void CreateRoomMethod()
 		{
-			if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) {
-				if (PhotonNetwork.AuthValues == null) {
-					PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
+				if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) {
+					if (PhotonNetwork.AuthValues == null) {
+						PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
+					}
+				string PlayerName = PlayerPrefs.GetString ("userid");
+				PhotonNetwork.AuthValues.UserId = PlayerName;
+				PhotonNetwork.LocalPlayer.NickName = PlayerName;
+					PhotonNetwork.ConnectUsingSettings ();
 				}
-//			int num = 0;
-//			num = Random.Range (2, 20000);
-				PhotonNetwork.AuthValues.UserId = "aaa";
-				PhotonNetwork.LocalPlayer.NickName = "aaa";
-				PhotonNetwork.ConnectUsingSettings ();
-			}
 		}
 		public override void OnConnectedToMaster()
 		{
@@ -38,8 +37,14 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public override void OnJoinedLobby()
 		{
-			print ("Joined lobby");
-			PhotonNetwork.CreateRoom ("nsd", new Photon.Realtime.RoomOptions{MaxPlayers=2,PlayerTtl=300000,EmptyRoomTtl=10000} , null);
+				print ("Joined lobby");
+				PhotonNetwork.CreateRoom ("nsd2", new Photon.Realtime.RoomOptions { 
+					MaxPlayers = 2,
+					PlayerTtl = 300000, 
+					EmptyRoomTtl = 10000 
+				}
+				, null);
+			
 		}
 		public override void OnCreatedRoom()
 		{
@@ -54,23 +59,17 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public override void OnJoinedRoom()
 		{
+			print (PhotonNetwork.MasterClient.NickName);
 			print ("Room Joined successfully");
 			if (PhotonNetwork.PlayerList.Length == 2) 
 			{
 				isRemote = true;
 			}
-			SceneManager.LoadScene ("OneOnOneGameBoard");
+			if (!JoinedRoomFlag) {
+				SceneManager.LoadScene ("OneOnOneGameBoard");
+//				SceneManager.LoadScene("BettingAmountScene");
+			}
+			JoinedRoomFlag = true;
 		}
-//		public override void OnJoinRoomFailed (short returnCode, string message)
-//		{
-//			print ("OnJoinRoomFailed (short returnCode, string message)");
-////			base.OnJoinRoomFailed (returnCode, message);
-//		}
-//		public override void OnDisconnected (Photon.Realtime.DisconnectCause cause)
-//		{
-//			print (cause);
-////			base.OnDisconnected (cause);
-//		}
-		// Update is called once per frame
 	}
 }

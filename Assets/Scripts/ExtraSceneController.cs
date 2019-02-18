@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ExtraSceneController : MonoBehaviour 
 {
 	public static int HowManyPlayers;
+	public static int Playmode = 0;
 	public Toggle TwoPlayerToggle, FourPlayerToggle;
 	public GameObject TwoPlayerGameObject, FourPlayerGameObject;
 	public void SelectTwoPlayerGamePlay()
@@ -18,14 +19,39 @@ public class ExtraSceneController : MonoBehaviour
 		TwoPlayerGameObject.SetActive (false);
 		FourPlayerGameObject.SetActive (FourPlayerToggle.isOn);
 	}
-	public void LoadBettingAmountScene()
+	public void LoadBettingAmountForOneOnOneScene()
 	{
 		
-		SceneManager.LoadScene ("BettingAmountScene");
+		SceneManager.LoadScene ("BettingAmountForOneOnOne");
 	}
-	public void LoadColorPickingScene()
+	public void LoadBettingAmountFor4PlayerRandom()
 	{
-		SceneManager.LoadScene ("ColorPicking");
+		SceneManager.LoadScene ("BettingAmountFor4PlayerRandom");
+	}
+	public void LoadBettingAmountFor2PlayerPlayWithFriends()
+	{
+		SceneManager.LoadScene ("BettingAmountFor2PlayerPlayWithFriends");
+	}
+	public void LoadBettingAmountFor4PlayerPlayWithFriends()
+	{
+		SceneManager.LoadScene ("BettingAmountFor4PlayerPlayWithFriends");
+	}
+
+	public void LoadColorPickingForOneOnOne()
+	{
+		SceneManager.LoadScene ("ColorPickingForOneOnOne");
+	}
+	public void LoadColorPickingFor4PlayerRandom()
+	{
+		SceneManager.LoadScene ("ColorPickingFor4PlayerRandom");
+	}
+	public void LoadColorPicking2PlayerPlayWithFriends()
+	{
+		SceneManager.LoadScene ("ColorPickingFor2PlayerPlayWithFriends");
+	}
+	public void LoadColorPicking4PlayerPlayWithFriends()
+	{
+		SceneManager.LoadScene ("ColorPickingFor4PlayerPlayWithFriends");
 	}
 	public void LoadExtraScene()
 	{

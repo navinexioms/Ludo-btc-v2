@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using RestSharp;
+using SimpleJSON;
 using UnityEngine.Networking;
 
-namespace RestSharp.Extensions
-{
+
 public class SceneController : MonoBehaviour
 {
 	public GameObject SplashScreen;
@@ -17,7 +16,8 @@ public class SceneController : MonoBehaviour
 	public GameObject AvatarScreen;
 	public Text Username1;
 	public Text Password1;
-//	public url a;
+	JSONNode rootnode = new JSONClass ();
+	JSONNode rootnode1 = new JSONClass ();
 	public string Username=null, Password=null;
 
 	private bool netConnectivity;
@@ -40,7 +40,6 @@ public class SceneController : MonoBehaviour
 		{
 			print ("no Internet connection is there");
 		}
-			print(Username1.text+""+Password1.text);
 	}
 
 	IEnumerator LoadPanel(GameObject panelToDisable,GameObject PanelToEnable,float time,string message)
@@ -88,10 +87,12 @@ public class SceneController : MonoBehaviour
 		if (Username.Length == 0) 
 		{
 			StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 1.1f, "please enter username"));
+			PlayerPrefs.SetString ("userid", null);
 		} 
 		else if (Password.Length == 0) 
 		{
 			StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 1.1f, "please enter password"));
+			PlayerPrefs.SetString ("userid", Username);
 		}
 		else if (Application.internetReachability == NetworkReachability.NotReachable) 
 		{
@@ -99,31 +100,83 @@ public class SceneController : MonoBehaviour
 		}
 		else if (Username.Length > 0 && Password.Length > 0 && (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)) 
 		{
-				
-				WWW request =new WWW("http://apienjoybtc.exioms.me/api/Home/log?my_sponsar_id="+Username+"&password="+Password);
-				StartCoroutine (HitUrl (request));
-//				var client = new RestClient("http://apienjoybtc.exioms.me/api/Home/log?my_sponsar_id=ENB20191&password=ebtc@admin");
-//				var request = new RestRequest(Method.GET);
-//				request.AddHeader("Postman-Token", "6b802c90-e2ce-4cc5-a9f7-5668d0cadfec");
-//				request.AddHeader("cache-control", "no-cache");
-//				request.AddHeader("Content-Type", "application/json");
-//				request.AddHeader("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
-//				request.AddParameter("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW", "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name="my_sponsar_id"\r\n\r\nITG20172\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name="password"\r\n\r\n123456\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--", ParameterType.RequestBody);
-//				IRestResponse response = client.Execute(request);
-//			StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 0,"a"));
-
+			StartCoroutine (HitUrl());
 		}
 
 	}
-		IEnumerator HitUrl(WWW abc)
-		{
-			yield return abc;
-			print (abc.text);
+	IEnumerator HitUrl()
+	{
+		UnityWebRequest request =new UnityWebRequest("http://apienjoybtc.exioms.me/api/Home/login?my_sponsar_id="+Username+"&password="+Password);
+
+		request.chunkedTransfer = false;
+
+		request.downloadHandler = new DownloadHandlerBuffer ();
+
+		yield return request.SendWebRequest ();
+		print(request.downloadHandler.text);
+		if (request.error != null) {
+			print ("something went wrong");
+			print (request.error);
+		} else {
+			string msg = request.downloadHandler.text.ToString();
+			string start = "";
+			if (msg.Contains ("{")) {
+				print ("Contains");
+				msg=msg.Substring(1,msg.Length-2);
+				print (msg);
+				rootnode = SimpleJSON.JSONData.Parse (msg);
+//				print (rootnode);
+				print (rootnode [0]);
+				string KeyValues = rootnode [0];
+				print (KeyValues);
+				if (!KeyValues.Contains ("Invalidlogincredentials")) {
+					print ("valid");
+					PlayerPrefs.SetString ("userid", Username);
+					string name = PlayerPrefs.GetString ("userid");
+					print (name);
+					StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 1f, "a"));
+				}
+				else {
+					print ("Invalid");
+					StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 1.1f, "invalid login credentials"));
+				}
+			} 
 		}
+	}
+	/*public void MyMethod()
+	{
+		StartCoroutine(HitUrl1());	
+	}
+	IEnumerator HitUrl1()
+	{
+		UnityWebRequest request =new UnityWebRequest("http://shehnaiya.com/pharomyd/index.php/webservice/countryList");
+
+		request.chunkedTransfer = false;
+
+		request.downloadHandler = new DownloadHandlerBuffer ();
+
+		yield return request.SendWebRequest ();
+		if (request.error != null) {
+			print ("something went wrong");
+			print (request.error);
+		} else {
+			string msg = request.downloadHandler.text.ToString();
+			rootnode = SimpleJSON.JSONData.Parse (msg);
+			print (rootnode [1][0]);
+			int i = 0;
+			foreach (JSONNode j in rootnode[1].Childs) {
+				print (j [0]);
+			}
+		}
+
+	}*/
 	public void TakeuserName(string uname) 
 	{
 		Username = uname.ToString ();
 		print ("Username:"+Username+" username:"+uname);
+
+		print (name);
+
 	}
 	public void TakePassword(string pname)
 	{
@@ -141,5 +194,4 @@ public class SceneController : MonoBehaviour
 		
 		SceneManager.LoadScene ("PlayerVSAI");
 	}
-}
 }

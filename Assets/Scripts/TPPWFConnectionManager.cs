@@ -11,20 +11,10 @@ namespace Photon.Pun.UtilityScripts
 	public class TPPWFConnectionManager : MonoBehaviourPunCallbacks {
 		public static bool isMaster,isRemote,JoinedRoomFlag;
 		public Text RoomName,WarningText;
-
+		public static int PlayMode = 0;
 		void Awake()
 		{
 			DontDestroyOnLoad (this);
-		}
-	// Use this for initialization
-		void Start () 
-		{
-			
-		}
-	
-	// Update is called once per frame
-		void Update () {
-		
 		}
 		public void CreateOrJoinRoomMethod()
 		{
@@ -33,8 +23,9 @@ namespace Photon.Pun.UtilityScripts
 				{
 					PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
 				}
-				PhotonNetwork.AuthValues.UserId = "nsd";
-				PhotonNetwork.LocalPlayer.NickName = "nsd";
+				string PlayerName = PlayerPrefs.GetString ("userid");
+				PhotonNetwork.AuthValues.UserId = PlayerName;
+				PhotonNetwork.LocalPlayer.NickName = PlayerName;
 				PhotonNetwork.ConnectUsingSettings ();
 			} else {
 				StartCoroutine (RoomNameWarning());
@@ -83,14 +74,16 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public override void OnJoinedRoom()
 		{
+			print (PhotonNetwork.MasterClient.NickName);
 			print ("Room Joined successfully");
-
 			if (PhotonNetwork.PlayerList.Length == 2) 
 			{
 				isRemote = true;
 			}
 			if (!JoinedRoomFlag) {
-				SceneManager.LoadScene ("OneOnOneGameBoard");
+//				SceneManager.LoadScene ("OneOnOneGameBoard");
+				PlayMode=1;
+				SceneManager.LoadScene("BettingAmountFor2PlayerPlayWithFriends");
 			}
 			JoinedRoomFlag = true;
 		}

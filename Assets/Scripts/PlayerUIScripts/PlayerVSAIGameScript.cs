@@ -9,6 +9,8 @@ public class PlayerVSAIGameScript : MonoBehaviour
 	public Text GameOverText;
 	private int totalBlueInHouse, totalGreenInHouse;
 
+
+
 	public GameObject BlueFrame, GreenFrame;
 
 	public GameObject BluePlayerI_Border,BluePlayerII_Border,BluePlayerIII_Border,BluePlayerIV_Border;
@@ -346,7 +348,8 @@ public class PlayerVSAIGameScript : MonoBehaviour
 			DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [randomDice];
 			yield return new WaitForSeconds(.12f);
 		}
-		selectDiceNumAnimation = randomDice + 1;
+//		selectDiceNumAnimation = randomDice + 1;
+		selectDiceNumAnimation=6;
 		StartCoroutine (PlayersNotInitialized ());
 	}
 
@@ -1149,6 +1152,7 @@ public class PlayerVSAIGameScript : MonoBehaviour
 		Application.targetFrameRate = 30;
 		randomNo = new System.Random ();
 
+//		print (blueMovemenBlock [0].GetComponent<RectTransform>().TransformVector());
 		//Player initial positions...........
 		BluePlayers_Pos[0]=BluePlayerI.transform.position;
 		BluePlayers_Pos[1] = BluePlayerII.transform.position;

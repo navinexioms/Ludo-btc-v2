@@ -1881,6 +1881,7 @@ namespace Photon.Pun.UtilityScripts
 
 		public override void OnJoinedRoom ()
 		{
+			print ("Joined Room");
 			DisconnectText.text = null;
 			ReconnectButton.SetActive (false);
 			DisconnectPanel.SetActive (false);
