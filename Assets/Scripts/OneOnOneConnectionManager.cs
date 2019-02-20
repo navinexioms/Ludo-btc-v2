@@ -38,7 +38,7 @@ namespace Photon.Pun.UtilityScripts
 		public override void OnJoinedLobby()
 		{
 				print ("Joined lobby");
-				PhotonNetwork.CreateRoom ("nsd2", new Photon.Realtime.RoomOptions { 
+			PhotonNetwork.JoinOrCreateRoom ("nsd2", new Photon.Realtime.RoomOptions { 
 					MaxPlayers = 2,
 					PlayerTtl = 300000, 
 					EmptyRoomTtl = 10000 
@@ -55,7 +55,7 @@ namespace Photon.Pun.UtilityScripts
 		{
 			print(msg1);
 
-			PhotonNetwork.JoinRoom ("nsd");
+//			PhotonNetwork.JoinRoom ("nsd");
 		}
 		public override void OnJoinedRoom()
 		{

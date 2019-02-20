@@ -12,7 +12,12 @@ namespace Photon.Pun.UtilityScripts
 {
 	public class OneOnOneGameLogic :  MonoBehaviourPunCallbacks,IPunTurnManagerCallbacks
 	{
+		public GameObject QuitPanel;
+
 		private PunTurnManager turnManager;
+
+		public int OccuranceOfSix;
+		public int TrialOFTossing;
 
 		public int TriggeredTime;
 		public int TriggerCounter;
@@ -179,10 +184,8 @@ namespace Photon.Pun.UtilityScripts
 			//==============CHECKING WHO PLAYER WINS SURING===========//
 			if (totalBlueInHouse > 3) 
 			{
-				print ("Player Wins");
+				print ("Player1 Wins");
 				playerTurn = "none";
-				GameOver.SetActive (true);
-				GameOverText.text = "PLAYER WIN'S";
 				if (PhotonNetwork.IsMasterClient) {
 					WinPanel.SetActive (true);
 				} else {
@@ -191,10 +194,8 @@ namespace Photon.Pun.UtilityScripts
 			}
 			if (totalGreenInHouse > 3) 
 			{
-				print ("AI Wins");
+				print ("Player2 Wins");
 				playerTurn = "none";
-				GameOver.SetActive (true);
-				GameOverText.text = "AI WIN'S";
 				if (!PhotonNetwork.IsMasterClient) {
 					WinPanel.SetActive (true);
 				} else {
@@ -213,8 +214,6 @@ namespace Photon.Pun.UtilityScripts
 					currentPlayer = BluePlayerIII_Script.BluePlayerIII_ColName;
 				if (currentPlayerName == "BLUE PLAYER IV") 
 					currentPlayer = BluePlayerIV_Script.BluePlayerIV_ColName;
-				//	print ("currentPlayerName:" + currentPlayerName);
-				//	print ("currentPlayer:" + currentPlayer);
 			}
 			if (currentPlayerName.Contains ("GREEN PLAYER"))
 			{
@@ -226,8 +225,6 @@ namespace Photon.Pun.UtilityScripts
 					currentPlayer = GreenPlayerIII_Script.GreenPlayerIII_ColName;
 				if (currentPlayerName == "GREEN PLAYER IV") 
 					currentPlayer = GreenPlayerIV_Script.GreenPlayerIV_ColName;
-				//	print ("currentPlayerName:" + currentPlayerName);
-				//	print ("currentPlayer:" + currentPlayer);
 			}
 
 			//============PLayer vs Opponent=============//
@@ -237,14 +234,11 @@ namespace Photon.Pun.UtilityScripts
 				if (currentPlayerName.Contains ("BLUE PLAYER")) 
 				{
 					for (i = 0; i < 4; i++) {
-						//	print ("Blue Player vs GreenPlayer");
 						if ((i == 0 && currentPlayer == GreenPlayerI_Script.GreenPlayerI_ColName && (currentPlayer != "Star" && GreenPlayerI_Script.GreenPlayerI_ColName != "Star")) ||
 							(i == 1 && currentPlayer == GreenPlayerII_Script.GreenPlayerII_ColName && (currentPlayer != "Star" && GreenPlayerII_Script.GreenPlayerII_ColName != "Star")) ||
 							(i == 2 && currentPlayer == GreenPlayerIII_Script.GreenPlayerIII_ColName && (currentPlayer != "Star" && GreenPlayerIII_Script.GreenPlayerIII_ColName != "Star")) ||
 							(i == 3 && currentPlayer == GreenPlayerIV_Script.GreenPlayerIV_ColName && (currentPlayer != "Star" && GreenPlayerIV_Script.GreenPlayerIV_ColName != "Star"))) {
 							print (" BluePlayer  Beaten GreenPlayerI");
-							//	GreenPlayerI.transform.position = GreenPlayerI_Pos;
-							//	GreenPlayerI_Script.GreenPlayerI_ColName = "none";
 							GreenPlayers [i].transform.position = GreenPlayers_Pos [i];
 							GreenPlayer_Steps [i] = 0;
 							playerTurn = "BLUE";
@@ -270,7 +264,6 @@ namespace Photon.Pun.UtilityScripts
 
 				if (currentPlayerName.Contains ("GREEN PLAYER")) 
 				{
-					//	print ("GreenPlayer VS blue Player");
 					i = 0;
 					for (i = 0; i < 4; i++) {
 						if ((i == 0 && currentPlayer == BluePlayerI_Script.BluePlayerI_ColName && (currentPlayer != "Star" && BluePlayerI_Script.BluePlayerI_ColName != "Star")) ||
@@ -332,6 +325,204 @@ namespace Photon.Pun.UtilityScripts
 			TimerImage.fillAmount = 1;
 		}
 
+
+
+		void CheckToChangePossibilityOfTwoPlayerATSamePosition ()
+		{
+			if (playerTurn == "BLUE") {
+				if (BluePlayer_Steps [0] > 0 &&
+					((BluePlayer_Steps [0] + selectDiceNumAnimation == BluePlayer_Steps [1]) || (BluePlayer_Steps [0] + selectDiceNumAnimation == BluePlayer_Steps [2]) || (BluePlayer_Steps [0] + selectDiceNumAnimation == BluePlayer_Steps [3]))) {
+					if (BluePlayer_Steps [0] + selectDiceNumAnimation != 9 && BluePlayer_Steps [0] + selectDiceNumAnimation != 14 && BluePlayer_Steps [0] + selectDiceNumAnimation != 22 && BluePlayer_Steps [0] + selectDiceNumAnimation != 27 &&
+						BluePlayer_Steps [0] + selectDiceNumAnimation != 35 && BluePlayer_Steps [0] + selectDiceNumAnimation != 40 && BluePlayer_Steps [0] + selectDiceNumAnimation != 48 && BluePlayer_Steps [0] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if ((BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [3]) &&
+								BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [3] && 
+								BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [3] &&
+								BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [2]) {
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				} else if (BluePlayer_Steps [1] > 0
+					&& ((BluePlayer_Steps [1] + selectDiceNumAnimation == BluePlayer_Steps [0]) || (BluePlayer_Steps [1] + selectDiceNumAnimation == BluePlayer_Steps [2]) || (BluePlayer_Steps [1] + selectDiceNumAnimation == BluePlayer_Steps [3]))) {
+					if (BluePlayer_Steps [1] + selectDiceNumAnimation != 9 && BluePlayer_Steps [1] + selectDiceNumAnimation != 14 && BluePlayer_Steps [1] + selectDiceNumAnimation != 22 && BluePlayer_Steps [1] + selectDiceNumAnimation != 27 &&
+						BluePlayer_Steps [1] + selectDiceNumAnimation != 35 && BluePlayer_Steps [1] + selectDiceNumAnimation != 40 && BluePlayer_Steps [1] + selectDiceNumAnimation != 48 && BluePlayer_Steps [1] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if ((BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [3]) &&
+								BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [3] && 
+								BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [3] &&
+								BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [2]) {
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				} else if (BluePlayer_Steps [2] > 0 &&
+					((BluePlayer_Steps [2] + selectDiceNumAnimation == BluePlayer_Steps [0]) || (BluePlayer_Steps [2] + selectDiceNumAnimation == BluePlayer_Steps [1]) || (BluePlayer_Steps [2] + selectDiceNumAnimation == BluePlayer_Steps [3]))) {
+					if (BluePlayer_Steps [2] + selectDiceNumAnimation != 9 && BluePlayer_Steps [2] + selectDiceNumAnimation != 14 && BluePlayer_Steps [2] + selectDiceNumAnimation != 22 && BluePlayer_Steps [2] + selectDiceNumAnimation != 27 &&
+						BluePlayer_Steps [2] + selectDiceNumAnimation != 35 && BluePlayer_Steps [2] + selectDiceNumAnimation != 40 && BluePlayer_Steps [2] + selectDiceNumAnimation != 48 && BluePlayer_Steps [2] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if ((BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [3]) &&
+								BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [3] && 
+								BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [3] &&
+								BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [2]) {
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				} else if (BluePlayer_Steps [3] > 0 &&
+					((BluePlayer_Steps [3] + selectDiceNumAnimation == BluePlayer_Steps [0]) || (BluePlayer_Steps [3] + selectDiceNumAnimation == BluePlayer_Steps [1]) || (BluePlayer_Steps [3] + selectDiceNumAnimation == BluePlayer_Steps [2]))) {
+					if (BluePlayer_Steps [3] + selectDiceNumAnimation != 9 && BluePlayer_Steps [3] + selectDiceNumAnimation != 14 && BluePlayer_Steps [3] + selectDiceNumAnimation != 22 && BluePlayer_Steps [3] + selectDiceNumAnimation != 27 &&
+						BluePlayer_Steps [3] + selectDiceNumAnimation != 35 && BluePlayer_Steps [3] + selectDiceNumAnimation != 40 && BluePlayer_Steps [3] + selectDiceNumAnimation != 48 && BluePlayer_Steps [3] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if ((BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [0] + selectDiceNumAnimation != BluePlayer_Steps [3]) &&
+								BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [2] && BluePlayer_Steps [1] + selectDiceNumAnimation != BluePlayer_Steps [3] && 
+								BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [2] + selectDiceNumAnimation != BluePlayer_Steps [3] &&
+								BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [0] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [1] && BluePlayer_Steps [3] + selectDiceNumAnimation != BluePlayer_Steps [2]) {
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				}
+			}
+			if (playerTurn == "GREEN") {
+				if (GreenPlayer_Steps [0] > 0 &&
+					((GreenPlayer_Steps [0] + selectDiceNumAnimation == GreenPlayer_Steps [1]) || (GreenPlayer_Steps [0] + selectDiceNumAnimation == GreenPlayer_Steps [2]) || (GreenPlayer_Steps [0] + selectDiceNumAnimation == GreenPlayer_Steps [3]))) {
+					if (GreenPlayer_Steps [0] + selectDiceNumAnimation != 9 && GreenPlayer_Steps [0] + selectDiceNumAnimation != 14 && GreenPlayer_Steps [0] + selectDiceNumAnimation != 22 && GreenPlayer_Steps [0] + selectDiceNumAnimation != 27 &&
+						GreenPlayer_Steps [0] + selectDiceNumAnimation != 35 && GreenPlayer_Steps [0] + selectDiceNumAnimation != 40 && GreenPlayer_Steps [0] + selectDiceNumAnimation != 48 && BluePlayer_Steps [0] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if (GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [3] && 
+								GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [2]) {
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				} else if (GreenPlayer_Steps [1] > 0 &&
+					((GreenPlayer_Steps [1] + selectDiceNumAnimation == GreenPlayer_Steps [0]) || (GreenPlayer_Steps [1] + selectDiceNumAnimation == GreenPlayer_Steps [2]) || (GreenPlayer_Steps [1] + selectDiceNumAnimation == GreenPlayer_Steps [3]))) {
+					if (GreenPlayer_Steps [1] + selectDiceNumAnimation != 9 && GreenPlayer_Steps [1] + selectDiceNumAnimation != 14 && GreenPlayer_Steps [1] + selectDiceNumAnimation != 22 && GreenPlayer_Steps [1] + selectDiceNumAnimation != 27 &&
+						GreenPlayer_Steps [1] + selectDiceNumAnimation != 35 && GreenPlayer_Steps [1] + selectDiceNumAnimation != 40 && GreenPlayer_Steps [1] + selectDiceNumAnimation != 48 && BluePlayer_Steps [0] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if (GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [3] && 
+								GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [2]){
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				} else if (GreenPlayer_Steps [2] > 0 &&
+					((GreenPlayer_Steps [2] + selectDiceNumAnimation == GreenPlayer_Steps [0]) || (GreenPlayer_Steps [2] + selectDiceNumAnimation == GreenPlayer_Steps [1]) || (GreenPlayer_Steps [2] + selectDiceNumAnimation == GreenPlayer_Steps [3]))) {
+					if (GreenPlayer_Steps [2] + selectDiceNumAnimation != 9 && GreenPlayer_Steps [2] + selectDiceNumAnimation != 14 && GreenPlayer_Steps [2] + selectDiceNumAnimation != 22 && GreenPlayer_Steps [2] + selectDiceNumAnimation != 27 &&
+						GreenPlayer_Steps [2] + selectDiceNumAnimation != 35 && GreenPlayer_Steps [2] + selectDiceNumAnimation != 40 && GreenPlayer_Steps [2] + selectDiceNumAnimation != 48 && BluePlayer_Steps [0] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if (GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [3] && 
+								GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [2]) {
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				} else if (GreenPlayer_Steps [3] > 0 &&
+					((GreenPlayer_Steps [3] + selectDiceNumAnimation == GreenPlayer_Steps [0]) || (GreenPlayer_Steps [3] + selectDiceNumAnimation == GreenPlayer_Steps [1]) || (GreenPlayer_Steps [3] + selectDiceNumAnimation == GreenPlayer_Steps [2]))) {
+					if (GreenPlayer_Steps [3] + selectDiceNumAnimation != 9 && GreenPlayer_Steps [3] + selectDiceNumAnimation != 14 && GreenPlayer_Steps [3] + selectDiceNumAnimation != 22 && GreenPlayer_Steps [3] + selectDiceNumAnimation != 27 &&
+						GreenPlayer_Steps [3] + selectDiceNumAnimation != 35 && GreenPlayer_Steps [3] + selectDiceNumAnimation != 40 && GreenPlayer_Steps [3] + selectDiceNumAnimation != 48 && BluePlayer_Steps [0] + selectDiceNumAnimation != 57) {
+						print ("Possibility was there AnimationNum" + selectDiceNumAnimation);
+						selectDiceNumAnimation = 1;
+						bool TempFlag = false;
+						while (selectDiceNumAnimation != 6) {
+							if (GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [0] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [2] && GreenPlayer_Steps [1] + selectDiceNumAnimation != GreenPlayer_Steps [3] &&
+								GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [2] + selectDiceNumAnimation != GreenPlayer_Steps [3] && 
+								GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [0] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [1] && GreenPlayer_Steps [3] + selectDiceNumAnimation != GreenPlayer_Steps [2]) {
+								selectDiceNumAnimation = selectDiceNumAnimation;
+								DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation - 1];
+								TempFlag = true;
+								break;
+							} else {
+								selectDiceNumAnimation++;
+							}
+							if (TempFlag)
+								break;
+						}
+					}
+				}
+			}
+		}
+
+
+
 		public void DiceRoll()
 		{
 			if (isMyTurn) {
@@ -340,29 +531,39 @@ namespace Photon.Pun.UtilityScripts
 				DiceRollButton.GetComponent<Button> ().enabled = false;
 				selectDiceNumAnimation = Random.Range (0, 6);
 				selectDiceNumAnimation += 1;
+
+				CheckToChangePossibilityOfTwoPlayerATSamePosition ();
+
+				if ((selectDiceNumAnimation == 6 ) && TrialOFTossing < 4) {
+
+					OccuranceOfSix += 1;
+					if (OccuranceOfSix == 1) {
+						print ("One Time got 1 or 6");
+					}
+					if (OccuranceOfSix == 2) {
+						print ("Two Times got 1 or 6");
+					}
+					if (OccuranceOfSix == 3) {
+						print ("Occurance of six or One three times");
+						selectDiceNumAnimation = Random.Range (1, 6);
+						print ("Changed Number And Got" + selectDiceNumAnimation);
+						DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [selectDiceNumAnimation-1];
+						TrialOFTossing = 0;
+						OccuranceOfSix = 0;
+					}
+				} else {
+					print ("TrialOFTossing" + TrialOFTossing + " Reset TrialOFTossing");
+					TrialOFTossing = 0;
+					OccuranceOfSix = 0;
+				}
+
 				print ("selectDiceNumAnimation:" + selectDiceNumAnimation);
 				rootNode.Add ("DiceNumber", selectDiceNumAnimation.ToString(temp));
 				temp = rootNode.ToString ();
 
 				StartCoroutine (PlayersNotInitializedForTimeDelay (temp));
-
-				//	this.MakeTurn (temp);//This will not be called first
-
-
 			}
 		}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 		IEnumerator PlayersNotInitializedForTimeDelay(string temp)
@@ -559,20 +760,7 @@ namespace Photon.Pun.UtilityScripts
 			}
 			this.MakeTurn (temp);
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			
 		IEnumerator DiceToss(int DiceNumber)
 		{
 			int randomDice = 0;
@@ -584,16 +772,12 @@ namespace Photon.Pun.UtilityScripts
 			}
 			DiceRollButton.GetComponent<Image> ().sprite = DiceSprite [DiceNumber-1];
 			selectDiceNumAnimation = DiceNumber;
-			//	print ("selectDiceNumAnimation:" + selectDiceNumAnimation);
+
 			StartCoroutine (PlayersNotInitialized ());
 		}
 
-
-
-
 		IEnumerator PlayersNotInitialized()
 		{
-			//	print ("Executing PlayersNotInitialized()");
 			yield return new WaitForSeconds (.8f);
 			//game start initial position of each player(green and blue)
 			switch (playerTurn) 
@@ -604,7 +788,6 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [0]) >= selectDiceNumAnimation && BluePlayer_Steps [0] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [0])) {
 					BluePlayerI_Border.SetActive (true);
 					BluePlayerI_Button.interactable = true;
-					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerI_Border.SetActive (false);
 					BluePlayerI_Button.interactable = false;
@@ -612,7 +795,6 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [1]) >= selectDiceNumAnimation && BluePlayer_Steps [1] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [1])) {
 					BluePlayerII_Border.SetActive (true);
 					BluePlayerII_Button.interactable = true;
-					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerII_Border.SetActive (false);
 					BluePlayerII_Button.interactable = false;
@@ -620,7 +802,6 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [2]) >= selectDiceNumAnimation && BluePlayer_Steps [2] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [2])) {
 					BluePlayerIII_Border.SetActive (true);
 					BluePlayerIII_Button.interactable = true;
-					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerIII_Border.SetActive (false);
 					BluePlayerIII_Button.interactable = false;
@@ -628,7 +809,6 @@ namespace Photon.Pun.UtilityScripts
 				if ((blueMovemenBlock.Count - BluePlayer_Steps [3]) >= selectDiceNumAnimation && BluePlayer_Steps [3] > 0 && (blueMovemenBlock.Count > BluePlayer_Steps [3])) {
 					BluePlayerIV_Border.SetActive (true);
 					BluePlayerIV_Button.interactable = true;
-					//	PlayerCanPlayAgain = true;
 				} else {
 					BluePlayerIV_Border.SetActive (false);
 					BluePlayerIV_Button.interactable = false;
@@ -655,7 +835,6 @@ namespace Photon.Pun.UtilityScripts
 						BluePlayerIV_Border.SetActive (true);
 						BluePlayerIV_Button.interactable = true;
 					}
-					//	PlayerCanPlayAgain = true;
 				}	
 				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
 
@@ -663,8 +842,6 @@ namespace Photon.Pun.UtilityScripts
 					!BluePlayerIII_Border.activeInHierarchy && !BluePlayerIV_Border.activeInHierarchy)
 				{
 					DisablingButtonsOFBluePlayes ();
-					//	print ("PLAYERS DON'T HAVE OPTION TO MOVE , SWITCH TO NEXT PLAYER TURN");
-
 					playerTurn = "GREEN";
 					InitializeDice ();
 				}
@@ -686,7 +863,6 @@ namespace Photon.Pun.UtilityScripts
 					GreenPlayerII_Border.SetActive (true);
 					GreenPlayerII_Button.interactable = true;
 					print ("Glowing 2nd green Player");
-					//	PlayerCanPlayAgain = true;
 				} else {
 					GreenPlayerII_Border.SetActive (false);
 					GreenPlayerII_Button.interactable = false;
@@ -694,7 +870,6 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [2]) >= selectDiceNumAnimation && GreenPlayer_Steps [2] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [2])) {
 					GreenPlayerIII_Border.SetActive (true);
 					GreenPlayerIII_Button.interactable = true;
-					//	PlayerCanPlayAgain = true;
 					print ("Glowing 3rd green Player");
 				} else {
 					GreenPlayerIII_Border.SetActive (false);
@@ -703,7 +878,6 @@ namespace Photon.Pun.UtilityScripts
 				if ((greenMovementBlock.Count - GreenPlayer_Steps [3]) >= selectDiceNumAnimation && GreenPlayer_Steps [3] > 0 && (greenMovementBlock.Count > GreenPlayer_Steps [3])) {
 					GreenPlayerIV_Border.SetActive (true);
 					GreenPlayerIV_Button.interactable = true;
-					//	PlayerCanPlayAgain = true;
 					print ("Glowing 4th green Player");
 				} else {
 					GreenPlayerIV_Border.SetActive (false);
@@ -733,7 +907,6 @@ namespace Photon.Pun.UtilityScripts
 						GreenPlayerIV_Border.SetActive (true);
 						GreenPlayerIV_Button.interactable = true;
 					}
-					//	PlayerCanPlayAgain = true;
 				}
 				//=========================PLAYERS DON'T HAVE ANY MOVES , SWITCH TO NEXT PLAYER'S TURN=========================//
 
@@ -764,7 +937,6 @@ namespace Photon.Pun.UtilityScripts
 					{
 						bluePlayer_Path [i] = blueMovemenBlock [BluePlayer_Steps [0] + i].transform.position;
 					}
-
 					BluePlayer_Steps [0] += selectDiceNumAnimation;
 					//============Keeping the Turn to blue Players side============//
 					if (selectDiceNumAnimation == 6) 
@@ -807,14 +979,11 @@ namespace Photon.Pun.UtilityScripts
 					}
 
 					BluePlayer_Steps [0] += selectDiceNumAnimation;
-
 					playerTurn = "BLUE";
-
 					MovingBlueOrGreenPlayer (BluePlayerI, bluePlayer_Path);
 					totalBlueInHouse += 1;
 					print ("Cool");
 					BluePlayerI_Button.enabled = false;
-
 					if (PhotonNetwork.IsMasterClient) {
 
 					}
@@ -849,7 +1018,6 @@ namespace Photon.Pun.UtilityScripts
 					}
 
 					BluePlayer_Steps [1] += selectDiceNumAnimation;
-
 					//============Keeping the Turn to blue Players side============//
 					if (selectDiceNumAnimation == 6) 
 					{
@@ -1567,6 +1735,19 @@ namespace Photon.Pun.UtilityScripts
 			}
 		}
 
+		public void EnableQuitTheRoom()
+		{
+			QuitPanel.SetActive (true);
+		}
+		public void CancelQuiting()
+		{
+			QuitPanel.SetActive (false);
+		}
+		public void QuitTheRoom()
+		{
+			PhotonNetwork.LeaveRoom ();
+		}
+
 		void Start () 
 		{
 			PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 1000 ;
@@ -1814,8 +1995,6 @@ namespace Photon.Pun.UtilityScripts
 		{
 			print ("StartTurn000");
 
-			//	isMyTurn = true;
-
 			if (PhotonNetwork.IsMasterClient)
 			{
 				print ("StartTurn1111");
@@ -1907,7 +2086,6 @@ namespace Photon.Pun.UtilityScripts
 
 		public override void OnPlayerLeftRoom (Photon.Realtime.Player otherPlayer)
 		{	
-			//	base.OnPlayerLeftRoom (otherPlayer);
 			print ("Player Disconnected");
 			playerCounter -= 1;
 			TriggeredTime = 0;
@@ -1930,14 +2108,14 @@ namespace Photon.Pun.UtilityScripts
 			TimerImage.fillAmount = 1;
 			DisconnectPanel.SetActive (true);
 			DisconnectText.text = "DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
-			ReconnectButton.SetActive (true);
-			//	base.OnDisconnected (cause);
-		}
+			ReconnectButton.SetActive (true);		}
 
 		void Update()
 		{		
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				QuitPanel.SetActive (true);
+			}
 			if (!turnManager.CancelGame) {
-				//	print ("Remaining time" + this.turnManager.RemainingSecondsInTurn+" TurnDuration:"+this.turnManager.TurnDuration+"Turn Value:"+this.turnManager.Turn);
 				if (!PhotonNetwork.InRoom) {
 					return;
 				}
